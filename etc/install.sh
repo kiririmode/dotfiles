@@ -18,7 +18,7 @@ dotfiles_logo='
   2. Symlinking dot files to your home directory
   3. Execute all sh files within `etc/init/` (optional)
   See the README for documentation.
-  https://github.com/b4b4r07/dotfiles
+  https://github.com/kiririmode/dotfiles
   Copyright (c) 2016 @kiririmode
   Licensed under the MIT license.
 '
@@ -29,6 +29,81 @@ function is_debug() {
     else
         return 1
     fi
+}
+
+function is_interactive() {
+    # $- が i を含んでいたら interactive shell を意味する
+    if [ "${-/i/}" != "$-" ]; then
+        return 0
+    fi
+    return 1
+}
+
+lower() {
+    if [ $# -eq 0 ]; then
+        cat <&0
+    elif [ $# -eq 1 ]; then
+        if [ -f "$1" -a -r "$1" ]; then
+            cat "$1"
+        else
+            echo "$1"
+        fi
+    else
+        return 1
+    fi | tr "[:upper:]" "[:lower:]"
+}
+
+function ostype() {
+    uname | lower
+}
+
+function os_detect() {
+    export PLATFORM
+    case "$(ostype)" in
+        *'linux'*)  PLATFORM='linux'   ;;
+        *'darwin'*) PLATFORM='osx'     ;;
+        *'bsd'*)    PLATFORM='bsd'     ;;
+        *)          PLATFORM='unknown' ;;
+    esac
+}
+
+function is_osx() {
+    os_detect
+    if [ "$PLATFORM" = "osx" ]; then
+        return 0
+    else
+        return 1
+    fi
+}
+alias is_mac=is_osx
+
+function is_linux() {
+    os_detect
+    if [ "$PLATFORM" = "linux" ]; then
+        return 0
+    else
+        return 1
+    fi
+}
+
+function is_bsd() {
+    os_detect
+    if [ "$PLATFORM" = "bsd" ]; then
+        return 0
+    else
+        return 1
+    fi
+}
+
+
+
+function get_os() {
+    local os
+    for os in osx linux bsd; do
+        if is_$os; then
+            echo $os
+        fi
+    done
 }
 
 function has() {
@@ -212,22 +287,60 @@ function deploy_dotfiles() {
         :
     else
         make deploy
-    fi &&
-        e_newline && e_done "Deploy"
+    fi && e_newline && e_done "Deploy"
 }
 
+function initialize_dotfiles() {
+    e_newline
+    e_header "Initializing dotfile..."
 
+    if is_debug; then
+        :
+    else
+        e_warning $(PWD)
+        if [ -f Makefile ]; then
+            make init
+        else
+            log_fail "Makefile: not found"
+            exit 1
+        fi
+    fi && e_newline && e_done "Initialize"
+}
 
 function install_dotfiles() {
-    download_dotfiles
-    deploy_dotfiles
+    download_dotfiles &&
+    deploy_dotfiles &&
+    initialize_dotfiles "$@"
 }
 
-# 既に VITALIZE されているなら、インストール処理をスキップする
-if [ "${VITALIZED:=0}" = 1 ]; then
-    exit
-fi
+if echo "$-" | grep -q "i"; then
+    # interactive shell でなければ終了
+    VITALIZED=1
+    export VITALIZED
 
-trap "e_newline && e_error 'terminated'; exit 1" INT ERR
-echo "$dotfiles_logo"
-install_dotfiles
+    : return
+else
+    if [ "$0" = "${BASH_SOURCE:-}" ]; then
+        exit
+    fi
+
+    # 既に $DOTPATH がダウンロードされているなら、インストール処理をスキップする
+    if [ -d "$DOTPATH" ]; then
+        exit
+    fi
+
+    if [ -n "${BASH_EXECUTION_STRING:-}" ] || [ -p /dev/stdin ]; then
+        # 既に VITALIZE されているなら、インストール処理をスキップする
+        if [ "${VITALIZED:=0}" = 1 ]; then
+            exit
+        fi
+
+        trap "e_newline && e_error 'terminated'; exit 1" INT ERR
+        echo "$dotfiles_logo"
+        install_dotfiles "$@"
+
+        e_newline
+        e_arrow "Restarting your shell..."
+        exec "${SHELL:-/bin/zsh}"
+    fi
+fi
