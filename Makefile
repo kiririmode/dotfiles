@@ -16,7 +16,7 @@ help:
 list:
 	@$(foreach val, $(DOTFILES), /bin/ls -dF $(val);)
 
-# 隠しファイル、bin に対してシンボリックリンクを張る
+# Create a symbolic links of dotfiles to your home directory.
 deploy:
 	@echo 'Copyright (c) 2017 kiririmode All Rights Reserved.'
 	@echo '===> Start to deploy dotfiles to home directory.'
