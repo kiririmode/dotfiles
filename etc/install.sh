@@ -326,7 +326,7 @@ else
 
     # 既に $DOTPATH がダウンロードされているなら、インストール処理をスキップする
     if [ -d "$DOTPATH" ]; then
-        exit
+        return
     fi
 
     if [ -n "${BASH_EXECUTION_STRING:-}" ] || [ -p /dev/stdin ]; then

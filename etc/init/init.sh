@@ -22,4 +22,4 @@ do
     fi
 done
 
-log_pass "$0: Finish!!" | sed "s $DOTPATH \$DOTPATH g"
+log_pass "$0: Finish!!"
