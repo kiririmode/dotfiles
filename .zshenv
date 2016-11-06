@@ -2,27 +2,9 @@
 ## .zshenv
 ##
 
-if [[ -z "$DOTPATH" ]]; then
-    function directory() {
-        if [[ $# == 0 ]]; then
-            return 1
-        fi
-
-        local file cwd result
-
-        file="$1"
-        cd "$(dirname "$file")"
-        # physical current working directory (all symbolic links resolved).
-        cwd="$(pwd -P)"
-
-        echo "${cwd}"
-    }
-    dotpath="$(directory "$0")"
-    export DOTPATH=$dotpath
-fi
-
 # import common functions
-. $DOTPATH/etc/lib/vital.sh
+source $HOME/.path
+source $DOTPATH/etc/lib/vital.sh
 
 # typeset:
 #   -g: The -g (global) means that any resulting parameter will not be
