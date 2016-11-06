@@ -152,7 +152,7 @@ setopt path_dirs
 setopt print_exit_value
 
 # Print commands and their arguments as they are executed.
-setopt xtrace
+setopt no_xtrace
 
 # If  querying  the  user  before executing `rm *' or `rm path/*',
 # first wait ten seconds and ignore anything typed in that time.
