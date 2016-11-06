@@ -71,6 +71,7 @@ brew 'scons'
 brew 'ssh-copy-id'
 brew 'subversion', args: ['with-perl']
 brew 'swig'
+brew 'source-highlight'
 brew 'the_silver_searcher'
 brew 'tig'
 brew 'utf8proc'

@@ -24,3 +24,7 @@ path=(
     $(brew --prefix findutils)/libexec/gnubin(N-/)
     $path
 )
+
+### less setting
+# Command line to invoke the (optional) input-preprocessor.
+export LESSOPEN="| $(brew --prefix source-highlight)/bin/src-hilite-lesspipe.sh %s"
