@@ -140,7 +140,7 @@ manpath=(
 )
 
 ### xenv settings
-for xenv in pyenv plenv rbenv; do
+for xenv in pyenv plenv rbenv jenv; do
     if (( $+commands[$xenv] )); then
         path=($($xenv root)/shims $path)
         eval "$(SHELL=zsh $xenv init - --no-rehash)"
