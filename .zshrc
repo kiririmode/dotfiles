@@ -26,11 +26,6 @@ if [[ -f "$VITAL_PATH" ]]; then
     source "$VITAL_PATH"
 fi
 
-# run zsh configuration scripts
-for conf in $HOME/.zsh.d/zsh.*; do
-    source $conf
-done
-
 # run os dependent zsh configuration scripts
 if [[ -r $HOME/.zsh.d/$(get_os).zshrc ]]; then
     source $HOME/.zsh.d/$(get_os).zshrc
