@@ -24,7 +24,7 @@ setopt inc_append_history
 setopt hist_no_store
 
 # Remove function definitions from the history list.
-setopt hist_no_function
+setopt hist_no_functions
 
 # Save each command's beginning timestamp (in seconds since the epoch)
 # and the duration (in seconds) to the  history  file.
