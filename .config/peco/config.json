@@ -3,7 +3,7 @@
     "Keymap": {
         "C-g": "peco.Cancel",
         "C-v": "peco.SelectNextPage",
-        "M-v": "peco.SelectPreviousPage"
+        "M-v": "peco.SelectPreviousPage",
         "C-h": "peco.DeleteBackwardChar",
         "C-d": "peco.DeleteForwardChar",
         "C-c": "peco.Cancel",
