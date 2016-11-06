@@ -13,3 +13,6 @@ if [[ ! -f "$_Z_DATA" ]]; then
 fi
 
 . $(brew --prefix)/etc/profile.d/z.sh
+
+### zsh-syntax-highlighting: https://github.com/zsh-users/zsh-syntax-highlighting
+source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
