@@ -8,8 +8,16 @@ function directory() {
 
     local file cwd result
 
-    file="$1"
+    file="$(basename "$1")"
     cd "$(dirname "$file")"
+
+    # recursively
+    while [ -L "$file" ]; do
+        # read link
+        file="$(command readlink "$file")"
+        cd "$(dirname "$file")"
+        file="$(basename "$file")"
+    done
 
     # physical current working directory (all symbolic links resolved).
     cwd="$(pwd -P)"
