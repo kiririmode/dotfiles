@@ -35,3 +35,11 @@ done
 if [[ -r $HOME/.zsh.d/$(get_os).zshrc ]]; then
     source $HOME/.zsh.d/$(get_os).zshrc
 fi
+
+### liquid prompt settings: https://github.com/nojhan/liquidprompt
+
+# Only load Liquid Prompt in interactive shells, not from a script or
+# from scp
+if is_interactive; then
+    source $DOTPATH/etc/init/submodules/zsh/liquidprompt/liquidprompt
+fi
