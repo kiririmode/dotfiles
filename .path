@@ -1,0 +1,22 @@
+#!/bin/bash
+# -*- mode: shell-script -*-
+
+function directory() {
+    if [[ $# == 0 ]]; then
+        return 1
+    fi
+
+    local file cwd result
+
+    file="$1"
+    cd "$(dirname "$file")"
+
+    # physical current working directory (all symbolic links resolved).
+    cwd="$(pwd -P)"
+
+    # puts
+    echo "${cwd}"
+}
+
+dotpath="$(directory "$0")"
+export DOTPATH=$dotpath
