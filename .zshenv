@@ -105,7 +105,15 @@ export PAGER=less
 # --ignore-case:
 #   Causes searches to ignore case; that is, uppercase and lowercase
 #   are considered identical.
-export LESS='--RAW-CONTROL-CHARS --force --no-init --ignore-case'
+# --LONG-PROMPT
+#   Causes less to prompt even more verbosely than more.
+# --HILITE-UNREAD
+#   Like -w, but temporarily highlights the first new line after any
+#   forward movement command larger than one line.
+# --quit-if-one-screen
+# Causes less to automatically exit if the entire file can be
+# displayed on the first screen.
+export LESS='--RAW-CONTROL-CHARS --force --no-init --ignore-case --LONG-PROMPT --HILITE-UNREAD --quit-if-one-screen'
 # Selects a predefined character set.
 export LESSCHARSET='utf-8'
 # LESS man page colors (makes Man pages more readable).
