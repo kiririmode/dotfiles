@@ -19,7 +19,7 @@ dotfiles_logo='
   3. Execute all sh files within `etc/init/` (optional)
   See the README for documentation.
   https://github.com/kiririmode/dotfiles
-  Copyright (c) 2016 @kiririmode
+  Copyright (c) 2017 @kiririmode
   Licensed under the MIT license.
 '
 

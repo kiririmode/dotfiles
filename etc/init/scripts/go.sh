@@ -13,6 +13,8 @@ imports=(
     github.com/nsf/gocode
     # Print where symbols are defined in Go source code
     github.com/rogpeppe/godef
+    # Command goimports updates your Go import lines, adding missing ones and removing unreferenced ones.
+    golang.org/x/tools/cmd/goimports
 )
 
 for i in ${imports[@]}; do
