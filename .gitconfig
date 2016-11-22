@@ -1,5 +1,5 @@
 [core]
-    # Text viewer for use by Git commands
+	# Text viewer for use by Git commands
 	pager = less -q -R
 
 	# Enable parallel index preload for operations like git diff
