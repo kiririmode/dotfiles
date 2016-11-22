@@ -9,7 +9,7 @@ function directory() {
     local file cwd result
 
     file="$(basename "$1")"
-    cd "$(dirname "$file")"
+    cd "$(dirname "$1")"
 
     # recursively
     while [ -L "$file" ]; do
