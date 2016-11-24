@@ -23,6 +23,7 @@ function install_cask() {
     log_info "installing emacs lisp files ..."
     cd "$DOTPATH"/.emacs.d/
     $caskdir/bin/cask install
+    $caskdir/bin/cask update
     log_info "installed emacs lisp files successfully."
 
 }
