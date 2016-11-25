@@ -88,3 +88,6 @@
 ; Ask user a "y or n" question.  Return t if answer is "y".
 ; PROMPT is the string to display to ask the question.
 (fset 'yes-or-no-p 'y-or-n-p)
+
+; Toggle Yas minor mode in all buffers.
+(yas-global-mode +1)
