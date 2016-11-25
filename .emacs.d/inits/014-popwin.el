@@ -11,7 +11,7 @@
 ; takes one argument: the buffer.
 (setq popwin:special-display-config
       '(
-        ("*Help*"             :height 0.5 :noselect t   :stick nil)
+        ("*Help*"             :height 0.5 :noselect nil :stick nil)
         ("*godoc \.\*"        :height 0.5 :noselect nil :stick nil :regexp t)
         ("*git-gutter:diff*"  :height 0.5 :noselect nil :stick t)
         ("*magit\.\*"         :height 0.5 :noselect nil :stick nil :regexp t)
