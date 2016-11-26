@@ -3,8 +3,6 @@
      (add-to-list 'load-path (expand-file-name "~/src/github.com/golang/lint/misc/emacs"))
      (add-to-list 'exec-path (expand-file-name "~/bin"))
 
-     ; The 'gofmt' command.
-     (defvar gofmt-command "goimports")
      ; Add this to .emacs to run gofmt on the current buffer when saving:
      (add-hook 'before-save-hook 'gofmt-before-save)
 
@@ -13,6 +11,8 @@
      (ac-config-default)
      (require 'go-eldoc)
      (add-hook 'go-mode-hook 'go-eldoc-setup)
+     (add-hook 'go-mode-hook (lambda()
+                               (setq gofmt-command "goimports")))
 
      ; Set up eldoc function and enable eldoc-mode.
      (go-eldoc-setup)
@@ -39,4 +39,6 @@
      ; Show Go documentation for the identifier at POINT.
      (define-key go-mode-map (kbd "C-.") 'godoc-at-point)
 
-     (define-key go-mode-map (kbd "C-c C-d") 'my/helm-go)))
+     (define-key go-mode-map (kbd "C-c C-d") 'my/helm-go)
+
+     ; The 'gofmt' command.
