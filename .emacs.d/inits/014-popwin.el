@@ -18,4 +18,5 @@
         ("*Compile-Log*"      :height 0.5 :noselect nil :stick nil)
         ("*helm-for-files*"   :height 0.5 :noselect nil :stick nil)
         ("*RE-Builder*")
+        ("*golint*")
         ("*Gofmt Errors*"                 :noselect nil :stick nil)))
