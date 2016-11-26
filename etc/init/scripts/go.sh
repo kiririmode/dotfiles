@@ -15,6 +15,8 @@ imports=(
     github.com/rogpeppe/godef
     # Command goimports updates your Go import lines, adding missing ones and removing unreferenced ones.
     golang.org/x/tools/cmd/goimports
+    # A tool for speedup goimports command
+    github.com/monochromegane/dragon-imports/...
 )
 
 for i in ${imports[@]}; do
