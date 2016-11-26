@@ -15,8 +15,12 @@ imports=(
     github.com/rogpeppe/godef
     # Command goimports updates your Go import lines, adding missing ones and removing unreferenced ones.
     golang.org/x/tools/cmd/goimports
+    # Golint is a linter for Go source code.
+    github.com/golang/lint/golint
     # A tool for speedup goimports command
     github.com/monochromegane/dragon-imports/...
+    # Emacs flymake-mode for github
+    github.com/dougm/goflymake
 )
 
 for i in ${imports[@]}; do
