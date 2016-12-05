@@ -6,6 +6,7 @@
 (depends-on "auto-complete")
 (depends-on "auto-highlight-symbol")
 (depends-on "atom-dark-theme")
+(depends-on "dockerfile-mode")
 (depends-on "cask")
 (depends-on "edit-server")
 (depends-on "exec-path-from-shell")
