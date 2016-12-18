@@ -3,3 +3,4 @@
 *.elc
 .emacs.d/recentf
 .emacs.d/ac-comphist.dat
+.emacs.d/async-bytecomp.log
