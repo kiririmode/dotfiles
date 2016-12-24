@@ -1,3 +1,4 @@
+*.t diff=perl
 *.pl diff=perl
 *.psgi diff=perl
 *.htm diff=html
