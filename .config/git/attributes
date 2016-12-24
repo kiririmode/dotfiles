@@ -1,0 +1,6 @@
+*.pl diff=perl
+*.psgi diff=perl
+*.htm diff=html
+*.html diff=html
+*.rb diff=rb
+*.py diff=python
