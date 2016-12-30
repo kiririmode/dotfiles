@@ -28,6 +28,6 @@ if [ ! -f Brewfile ]; then
     brew bundle dump
 fi
 
-brew bundle
+brew -v bundle
 
 log_pass "brew: installed successfully"
