@@ -43,3 +43,7 @@ fi
 if is_interactive; then
     source $DOTPATH/etc/init/submodules/zsh/liquidprompt/liquidprompt
 fi
+
+function pe() {
+    ack "$@" . | peco --exec 'awk -F : '"'"'{print "+" $2 " " $1}'"'"' | xargs less -N '
+}

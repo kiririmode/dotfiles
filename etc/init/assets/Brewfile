@@ -89,6 +89,7 @@ brew 'digdag'
 brew 'zsh-syntax-highlighting'
 brew 'argon/mas/mas'
 brew 'sanemat/font/ricty'
+brew 'ack'
 cask '1password'
 cask 'alfred'
 cask 'aquaskk'
@@ -98,14 +99,11 @@ cask 'dropbox'
 cask 'eclipse-jee'
 cask 'evernote'
 cask 'firefox'
-cask 'google-chrome'
 cask 'growlnotify'
-cask 'Caskroom/versions/intellij-idea-ce'
 cask 'iterm2'
 cask 'karabiner'
 cask 'kindle'
 cask 'onyx'
-cask 'packer'
 cask 'skype'
 cask 'vagrant'
 cask 'virtualbox'
@@ -122,7 +120,6 @@ mas 'Display Menu', id: 549083868
 mas 'OmniFocus', id: 402835630
 mas 'SoraAnnai', id: 599799247
 mas 'LINE', id: 539883307
-mas 'Caffeine', id: 411246225
 mas 'Pages', id: 409201541
 mas 'Numbers', id: 409203825
 mas 'Evernote', id: 406056744
