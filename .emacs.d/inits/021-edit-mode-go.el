@@ -1,4 +1,4 @@
-(eval-after-load "go-mode"
+(with-eval-after-load "go-mode"
   '(progn
      (add-to-list 'exec-path (expand-file-name "~/bin"))
 
