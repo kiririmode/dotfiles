@@ -27,6 +27,7 @@
 (depends-on "helm-perldoc")
 (depends-on "helm-swoop")
 (depends-on "init-loader")
+(depends-on "helm-git-grep")
 (depends-on "graphviz-dot-mode")
 (depends-on "markdown-mode")
 (depends-on "magit")
