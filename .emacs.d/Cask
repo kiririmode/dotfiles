@@ -38,6 +38,7 @@
 (depends-on "redo+")
 (depends-on "ddskk")
 (depends-on "use-package")
+(depends-on "wgrep")
 (depends-on "web-mode")
 (depends-on "yaml-mode")
 (depends-on "yasnippet")
