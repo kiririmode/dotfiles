@@ -4,7 +4,6 @@ tap 'homebrew/apache'
 tap 'homebrew/bundle'
 tap 'homebrew/core'
 tap 'sanemat/font'
-cask 'java'
 cask 'xquartz'
 brew 'python3'
 brew 'libyaml'
@@ -96,18 +95,13 @@ cask 'aquaskk'
 cask 'caffeine'
 cask 'dash'
 cask 'dropbox'
-cask 'eclipse-jee'
 cask 'evernote'
 cask 'firefox'
 cask 'growlnotify'
 cask 'iterm2'
 cask 'karabiner'
-cask 'kindle'
-cask 'onyx'
 cask 'skype'
 cask 'vagrant'
-cask 'virtualbox'
-cask 'wireshark'
 mas 'The Unarchiver', id: 425424353
 mas 'Growl', id: 467939042
 mas 'iMovie', id: 408981434
@@ -124,3 +118,4 @@ mas 'Pages', id: 409201541
 mas 'Numbers', id: 409203825
 mas 'Evernote', id: 406056744
 mas 'PopClip', id: 445189367
+mas 'Kindle', id: 405399194
