@@ -29,5 +29,6 @@ if [ ! -f Brewfile ]; then
 fi
 
 brew -v bundle
+brew bundle cleanup
 
 log_pass "brew: installed successfully"
