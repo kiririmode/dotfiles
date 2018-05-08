@@ -91,3 +91,13 @@
 
 ; Toggle Yas minor mode in all buffers.
 (yas-global-mode +1)
+
+;; wgrep
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(require 'wgrep)
+
+;; the default key binding to switch to wgrep
+(setq wgrep-enable-key "r")
+
+;; apply all changes wheather or not buffer is readonly
+(setq wgrep-change-readonly-file t)
