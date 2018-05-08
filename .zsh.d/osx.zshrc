@@ -18,7 +18,6 @@ fi
 source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 ### path settings
-
 path=(
     $(brew --prefix coreutils)/libexec/gnubin(N-/)
     $(brew --prefix findutils)/libexec/gnubin(N-/)

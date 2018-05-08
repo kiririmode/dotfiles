@@ -30,5 +30,6 @@ fi
 
 brew -v bundle
 brew bundle cleanup
+brew cleanup
 
 log_pass "brew: installed successfully"
