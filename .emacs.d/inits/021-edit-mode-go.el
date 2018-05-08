@@ -35,7 +35,8 @@
     (helm :sources '(my/helm-go-source) :buffer "*helm go*"))
 
   ; Jump to the definition of the expression at POINT.
-  (define-key go-mode-map (kbd "M-.") 'godef-jump-other-window)
+  (define-key go-mode-map (kbd "M-.") 'godef-jump)
+  (define-key go-mode-map (kbd "M-,") 'pop-tag-mark)
   ; Show Go documentation for the identifier at POINT.
   (define-key go-mode-map (kbd "C-.") 'godoc-at-point)
 
