@@ -12,7 +12,7 @@
 (setq popwin:special-display-config
       '(
         ("*Help*"             :height 0.5 :noselect nil :stick nil)
-        ("*godoc \.\*"        :height 0.5 :noselect nil :stick nil :regexp t)
+        ("*godoc \.\*"        :width  0.5 :noselect nil :stick nil :regexp t :position right)
         ("*git-gutter:diff*"  :height 0.5 :noselect nil :stick t)
         ("*magit\.\*"         :height 0.5 :noselect nil :stick nil :regexp t)
         ("*Compile-Log*"      :height 0.5 :noselect nil :stick nil)
