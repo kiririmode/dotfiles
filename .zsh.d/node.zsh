@@ -2,7 +2,7 @@
 
 if which -s yarn; then
     path=(
-        $(yarn global bin)
+        $(yarn global bin)(N-/)
         $path
     )
 fi
