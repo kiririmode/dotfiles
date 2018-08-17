@@ -53,3 +53,6 @@
 	# patience:
 	#   Use "patience diff" algorithm when generating patches.
 	algorithm = patience
+
+[include]
+	path = ~/.gitconfig.local
