@@ -1,8 +1,3 @@
-(require 'git-gutter)
-(require 'magit)
-(require 'gitconfig-mode)
-(require 'gitignore-mode)
-
 (setq
  ; List of version control backends for which `git-gutter.el` will be used.
  git-gutter:handled-backends '(git svn hg bzr)
@@ -34,8 +29,3 @@
 (global-set-key (kbd "C-c v p") 'git-gutter:previous-hunk)
 ; Move to next diff hunk
 (global-set-key (kbd "C-c v n") 'git-gutter:next-hunk)
-
-;;; magit
-
-; Show the status of the current Git repository in a buffer.
-(global-set-key (kbd "C-x v") 'magit-status)

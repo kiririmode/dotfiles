@@ -4,3 +4,5 @@
 .emacs.d/recentf
 .emacs.d/ac-comphist.dat
 .emacs.d/async-bytecomp.log
+.emacs.d/el-get/
+.emacs.d/elpa/

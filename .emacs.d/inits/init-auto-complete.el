@@ -1,5 +1,3 @@
-(require 'auto-complete)
-
 ; Set `ac-trigger-key' to `KEY'
 (ac-set-trigger-key "TAB")
 

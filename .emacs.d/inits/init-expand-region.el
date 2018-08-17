@@ -1,5 +1,3 @@
-(require 'expand-region)
-
 ; Increase selected region by semantic units.
 (global-set-key (kbd "C-=") 'er/expand-region)
 (global-set-key (kbd "C-,") 'er/expand-region)

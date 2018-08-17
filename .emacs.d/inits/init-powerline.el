@@ -1,5 +1,3 @@
-(require 'powerline)
-
 ; Setup the default mode-line.
 (powerline-default-theme)
 

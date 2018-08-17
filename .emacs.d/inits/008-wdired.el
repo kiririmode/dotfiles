@@ -1,6 +1,3 @@
-(require 'wdired)
-
-
 (setq
  ; If non-nil, the permissions bits of the files are editable.
  wdired-allow-to-change-permissions t

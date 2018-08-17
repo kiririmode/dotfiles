@@ -1,5 +1,4 @@
 (require 'popwin)
-
 ; Non-nil if Popwin mode is enabled.
 (popwin-mode 1)
 
@@ -20,3 +19,5 @@
         ("*RE-Builder*")
         ("*golint*")
         ("*Gofmt Errors*"                 :noselect nil :stick nil)))
+
+(popwin-mode)
