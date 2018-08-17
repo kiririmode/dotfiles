@@ -35,7 +35,7 @@
 (depends-on "powerline")
 (depends-on "popwin")
 (depends-on "prodigy")
-(depends-on "redo+")
+; (depends-on "redo+")
 (depends-on "ddskk")
 (depends-on "use-package")
 (depends-on "terraform-mode")
@@ -43,3 +43,4 @@
 (depends-on "web-mode")
 (depends-on "yaml-mode")
 (depends-on "yasnippet")
+(depends-on "vue-mode")
