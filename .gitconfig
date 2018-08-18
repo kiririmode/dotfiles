@@ -5,6 +5,8 @@
 	# Enable parallel index preload for operations like git diff
 	preloadindex = true
 
+	editor = emacsclient
+
 [color]
 	# This variable determines the default value for variables such as
 	# color.diff and color.grep that control the use of color per
