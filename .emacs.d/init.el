@@ -45,7 +45,7 @@
 (el-get-bundle helm-git-grep)
 (el-get-bundle graphviz-dot-mode)
 (el-get-bundle markdown-mode)
-(el-get-bundle magit)
+;(el-get-bundle magit)
 (el-get-bundle multiple-cursors)
 (el-get-bundle powerline)
 (el-get-bundle popwin)
