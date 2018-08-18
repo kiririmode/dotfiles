@@ -60,7 +60,9 @@
 (el-get-bundle yaml-mode)
 (el-get-bundle yasnippet)
 (el-get-bundle init-loader)
+(el-get-bundle tarao/el-get-lock)
 
+(el-get-lock)
 
 ;;
 ;; 00X: global configuration with emacs default packages.
