@@ -52,7 +52,7 @@ brew 'z'
 brew 'zsh'
 brew 'zsh-syntax-highlighting'
 brew 'argon/mas/mas'
-brew 'sanemat/font/ricty'
+brew 'sanemat/font/ricty', args: ['--with-powerline']
 brew 'tfenv'
 brew 'ack'
 brew 'node'
