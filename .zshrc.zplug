@@ -4,6 +4,10 @@
 export ZPLUG_HOME=$HOME/.zplug
 source $ZPLUG_HOME/init.zsh
 
+zplug 'zsh-users/zsh-autosuggestions'
+export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=249'
+export ZSH_AUTOSUGGEST_USE_ASYNC=1
+
 #
 # alien theme 
 # 
