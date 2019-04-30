@@ -50,7 +50,6 @@ brew 'watch'
 brew 'wget'
 brew 'z'
 brew 'zsh'
-brew 'zsh-syntax-highlighting'
 brew 'argon/mas/mas'
 brew 'sanemat/font/ricty', args: ['--with-powerline']
 brew 'tfenv'
