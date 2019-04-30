@@ -1,3 +1,0 @@
-[submodule "etc/init/submodules/zsh/liquidprompt"]
-	path = etc/init/submodules/zsh/liquidprompt
-	url = https://github.com/nojhan/liquidprompt.git
