@@ -14,6 +14,8 @@ bindkey -d
 # default the next time the editor starts.
 bindkey -e
 
+# zplug
+source .zshrc.zplug
 
 # setting of DOTPATH
 if [[ -f $HOME/.path ]]; then
@@ -34,14 +36,6 @@ done
 # run os dependent zsh configuration scripts
 if [[ -r $HOME/.zsh.d/$(get_os).zshrc ]]; then
     source $HOME/.zsh.d/$(get_os).zshrc
-fi
-
-### liquid prompt settings: https://github.com/nojhan/liquidprompt
-
-# Only load Liquid Prompt in interactive shells, not from a script or
-# from scp
-if is_interactive; then
-    source $DOTPATH/etc/init/submodules/zsh/liquidprompt/liquidprompt
 fi
 
 function pe() {

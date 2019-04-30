@@ -1,0 +1,43 @@
+# zplug については以下を参照｡
+# https://github.com/zplug/zplug
+
+export ZPLUG_HOME=$HOME/.zplug
+source $ZPLUG_HOME/init.zsh
+
+#
+# alien theme 
+# 
+zplug "eendroroy/alien"
+# 左側のプロンプト
+export ALIEN_SECTIONS_LEFT=(
+  exit
+  user
+  path
+  vcs_branch:async
+# 以下のエラーメッセージが出力されるのでコメントアウト
+# fatal: ambiguous argument 'master...@u': unknown revision or path not in the working tree.
+# Use '--' to separate paths from revisions, like this:
+# 
+# vcs_status:async
+  vcs_dirty:async
+  newline
+  ssh
+  venv
+  prompt
+)
+
+# 右側のプロンプト
+export ALIEN_SECTIONS_RIGHT=(
+  battery
+  time
+)
+
+# Install plugins if there are plugins that have not been installed
+if ! zplug check --verbose; then
+    printf "Install? [y/N]: "
+    if read -q; then
+        echo; zplug install
+    fi
+fi
+# Then, source plugins and add commands to $PATH
+zplug load --verbose
