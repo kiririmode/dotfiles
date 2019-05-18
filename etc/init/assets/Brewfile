@@ -57,6 +57,8 @@ brew 'ack'
 brew 'node'
 brew 'yarn'
 brew 'zplug'
+# vscode で protocol buffer を format するときに必要
+brew 'clang-format'
 cask '1password'
 # cask 'alfred'
 cask 'caffeine'
