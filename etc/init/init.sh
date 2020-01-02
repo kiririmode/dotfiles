@@ -10,8 +10,7 @@ if [ -z "$DOTPATH" ]; then
     exit 1
 fi
 
-for i in "$DOTPATH"/etc/init/"$(get_os)"/*.sh
-do
+for i in "$DOTPATH"/etc/init/"$(get_os)"/*.sh; do
     if [ -f "$i" ]; then
         log_info "$(e_arrow "$(basename "$i")")"
         if [ "${DEBUG:-}" != 1 ]; then
