@@ -14,9 +14,11 @@ fi
 path=(
     $(brew --prefix coreutils)/libexec/gnubin(N-/)
     $(brew --prefix findutils)/libexec/gnubin(N-/)
+    $HOME/.
     $path
 )
 
-### less setting
 # Command line to invoke the (optional) input-preprocessor.
 export LESSOPEN="| $(brew --prefix source-highlight)/bin/src-hilite-lesspipe.sh %s"
+
+e_done "setting macos environment"
