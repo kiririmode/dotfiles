@@ -8,4 +8,5 @@
 .emacs.d/elpa/
 .emacs.d/network-security.data
 .emacs.d/server/
+.config/karabiner/automatic_backups
 bin/
