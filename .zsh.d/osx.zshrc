@@ -1,8 +1,4 @@
 ### -*- mode: shell-script -*-
-###
-### osx.zshrc
-###
-
 ### z configuration
 
 # datafile
