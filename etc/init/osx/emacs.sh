@@ -1,1 +1,0 @@
-../scripts/emacs.sh
