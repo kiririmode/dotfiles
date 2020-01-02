@@ -2,14 +2,14 @@
 # https://github.com/zplug/zplug
 
 export ZPLUG_HOME=$HOME/.zplug
-source $ZPLUG_HOME/init.zsh
+. $(brew --prefix zplug)/init.zsh
 
 zplug 'zsh-users/zsh-autosuggestions'
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=249'
 export ZSH_AUTOSUGGEST_USE_ASYNC=1
 
 # 多くのコマンドに対応する入力補完: https://github.com/zsh-users/zsh-completions
-zplug "zsh-users/zsh-completions" 
+zplug "zsh-users/zsh-completions"
 
 # fishシェル風のシンタクスハイライト: https://github.com/zsh-users/zsh-syntax-highlighting
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
@@ -30,8 +30,8 @@ bindkey '^xe' anyframe-widget-insert-git-branch
 bindkey '^x^e' anyframe-widget-insert-git-branch
 
 #
-# alien theme 
-# 
+# alien theme
+#
 zplug "eendroroy/alien"
 # 左側のプロンプト
 export ALIEN_SECTIONS_LEFT=(
@@ -42,8 +42,8 @@ export ALIEN_SECTIONS_LEFT=(
 # 以下のエラーメッセージが出力されるのでコメントアウト
 # fatal: ambiguous argument 'master...@u': unknown revision or path not in the working tree.
 # Use '--' to separate paths from revisions, like this:
-# 
-# vcs_status:async
+#
+  vcs_status:async
   vcs_dirty:async
   newline
   ssh
