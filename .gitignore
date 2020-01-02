@@ -10,3 +10,4 @@
 .emacs.d/server/
 .config/karabiner/automatic_backups
 bin/
+Brewfile.lock.json
