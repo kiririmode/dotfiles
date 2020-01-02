@@ -9,5 +9,6 @@
 .emacs.d/network-security.data
 .emacs.d/server/
 .config/karabiner/automatic_backups
+.config/wireshark/
 bin/
 Brewfile.lock.json
