@@ -1,8 +1,11 @@
-### node.js settings
+#!/bin/zsh
 
-if which -s yarn; then
+if has nodeenv; then
     path=(
-        $(yarn global bin)(N-/)
+        $HOME/.nodenv/bin(N-/)
         $path
     )
 fi
+eval "$(nodenv init -)"
+
+e_done "setting node environment"

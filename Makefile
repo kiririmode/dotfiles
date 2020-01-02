@@ -18,7 +18,6 @@ list:
 
 # Create a symbolic links of dotfiles to your home directory.
 deploy:
-	@echo 'Copyright (c) 2017 kiririmode All Rights Reserved.'
 	@echo '===> Start to deploy dotfiles to home directory.'
 	@echo ''
 	@$(foreach val, $(DOTFILES), ln -sfnv $(abspath $(val)) $(HOME)/$(val);)
@@ -31,6 +30,12 @@ update:
 
 init:
 	@DOTPATH=$(DOTPATH) bash $(DOTPATH)/etc/init/init.sh
+
+node-setup:
+	$(DOTPATH)/etc/init/scripts/setup-node.sh
+
+go-setup:
+	$(DOTPATH)/etc/init/scripts/setup-go.sh
 
 install: update deploy init
 	@exec $$SHELL
