@@ -28,8 +28,8 @@ if [ ! -f Brewfile ]; then
     brew bundle dump
 fi
 
-brew -v bundle
-brew bundle cleanup
-brew cleanup
+brew bundle install --verbose --no-upgrade
+brew bundle cleanup --force
+brew cleanup --verbose
 
 log_pass "brew: installed successfully"
