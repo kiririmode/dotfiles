@@ -5,14 +5,6 @@ DOTFILES   := $(filter-out $(EXCLUSIONS), $(CANDIDATES))
 
 all: install
 
-help:
-	@echo "make list         #=> Show dot files in this repo"
-	@echo "make deploy       #=> Create symlink to home directory"
-	@echo "make init         #=> Setup environment settings"
-	@echo "make update       #=> Fetch changes for this repo"
-	@echo "make install      #=> Run make update, deploy, init"
-	@echo "make clean        #=> Remove the dotfiles and this repo"
-
 list:
 	@$(foreach val, $(DOTFILES), /bin/ls -dF $(val);)
 
