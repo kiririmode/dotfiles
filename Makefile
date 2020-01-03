@@ -29,8 +29,13 @@ node-setup:
 go-setup:
 	$(DOTPATH)/etc/init/scripts/setup-go.sh
 
-install: update deploy init node-setup go-setup
+install: update deploy init node-setup go-setup install-tools
 	@exec $$SHELL
+
+install-tools: go-tools
+
+go-tools:
+	$(DOTPATH)/etc/init/scripts/install-go-tools.sh
 
 clean:
 	@echo "Remove dotfiles in your home directory...'
