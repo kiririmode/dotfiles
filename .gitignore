@@ -12,3 +12,4 @@
 .config/wireshark/
 bin/
 Brewfile.lock.json
+update-notifier-npm.json
