@@ -14,7 +14,7 @@ fi
 path=(
     $(brew --prefix coreutils)/libexec/gnubin(N-/)
     $(brew --prefix findutils)/libexec/gnubin(N-/)
-    $HOME/.
+    $HOME/bin
     $path
 )
 
