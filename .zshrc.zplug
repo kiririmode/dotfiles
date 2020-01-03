@@ -39,10 +39,6 @@ export ALIEN_SECTIONS_LEFT=(
   user
   path
   vcs_branch:async
-# 以下のエラーメッセージが出力されるのでコメントアウト
-# fatal: ambiguous argument 'master...@u': unknown revision or path not in the working tree.
-# Use '--' to separate paths from revisions, like this:
-#
   vcs_status:async
   vcs_dirty:async
   newline
@@ -64,5 +60,6 @@ if ! zplug check --verbose; then
         echo; zplug install
     fi
 fi
+
 # Then, source plugins and add commands to $PATH
 zplug load --verbose
