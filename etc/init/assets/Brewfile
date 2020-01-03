@@ -1,4 +1,5 @@
 tap 'homebrew/core'
+tap 'homebrew/cask'
 tap 'sanemat/font'
 
 # tools
@@ -38,7 +39,7 @@ brew 'pyenv'
 brew 'rbenv'
 brew 'jenv'
 brew 'direnv'
-brew 'nodeenv'
+brew 'nodenv'
 brew 'tfenv'
 brew 'goenv', args: ['HEAD']
 

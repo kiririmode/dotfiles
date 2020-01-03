@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-if has nodeenv; then
+if has nodenv; then
     path=(
         $HOME/.nodenv/bin(N-/)
         $path

@@ -29,7 +29,7 @@ node-setup:
 go-setup:
 	$(DOTPATH)/etc/init/scripts/setup-go.sh
 
-install: update deploy init
+install: update deploy init node-setup go-setup
 	@exec $$SHELL
 
 clean:

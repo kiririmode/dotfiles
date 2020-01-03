@@ -15,5 +15,5 @@ else
     goenv rehash
 fi
 
-goenv global $(GO_VERSION) >/dev/null
+goenv global ${GO_VERSION} >/dev/null
 e_done "setting golang ${GO_VERSION} environment."

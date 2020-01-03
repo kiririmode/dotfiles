@@ -15,5 +15,5 @@ else
     nodenv rehash
 fi
 
-nodenv global $(NODE_VERSION) >/dev/null
+nodenv global ${NODE_VERSION} >/dev/null
 e_done "setting node ${NODE_VERSION} environment."
