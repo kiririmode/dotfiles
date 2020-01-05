@@ -47,6 +47,7 @@ brew 'goenv', args: ['HEAD']
 cask '1password'
 cask 'alfred'
 cask 'caffeine'
+cask 'docker'
 cask 'dropbox'
 cask 'emacs'
 cask 'iterm2'
