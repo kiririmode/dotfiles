@@ -1,12 +1,12 @@
 tap 'homebrew/core'
 tap 'homebrew/cask'
-tap 'sanemat/font'
 
 # tools
 brew 'ansifilter'
 brew 'coreutils'
 brew 'curl'
 brew 'docker'
+brew 'docker-compose'
 brew 'findutils'
 brew 'gettext'
 brew 'ghq'
@@ -20,8 +20,15 @@ brew 'watch'
 brew 'wget'
 brew 'ack'
 brew 'mas'
+brew 'awscli'
+brew 'grpcurl'
+brew 'direnv'
+
+tap 'weaveworks/tap'
+brew 'weaveworks/tap/eksctl'
 
 # fonts
+tap 'sanemat/font'
 brew 'sanemat/font/ricty', args: ['with-powerline']
 
 # Shell integrations
