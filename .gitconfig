@@ -1,3 +1,6 @@
+[include]
+	path = ~/.gitconfig.local
+
 [core]
 	# Text viewer for use by Git commands
 	pager = less -q -R
@@ -56,5 +59,3 @@
 	#   Use "patience diff" algorithm when generating patches.
 	algorithm = patience
 
-[include]
-	path = ~/.gitconfig.local
