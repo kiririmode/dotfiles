@@ -15,7 +15,7 @@ bindkey -d
 bindkey -e
 
 # zplug
-source .zshrc.zplug
+source $HOME/.zshrc.zplug
 
 # setting of DOTPATH
 if [[ -f $HOME/.path ]]; then
