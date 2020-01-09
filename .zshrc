@@ -41,3 +41,5 @@ fi
 function pe() {
     ack "$@" . | peco --exec 'awk -F : '"'"'{print "+" $2 " " $1}'"'"' | xargs less -N '
 }
+
+eval "$(direnv hook zsh)"
