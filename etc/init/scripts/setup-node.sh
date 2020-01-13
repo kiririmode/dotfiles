@@ -6,7 +6,7 @@ set -eu
 
 . "$DOTPATH"/etc/lib/vital.sh
 
-readonly NODE_VERSION=12.13.1
+readonly NODE_VERSION=13.2.0
 
 if nodenv versions | grep ${NODE_VERSION} >/dev/null; then
     : # noop
