@@ -58,8 +58,10 @@ cask 'docker'
 cask 'dash'
 cask 'dropbox'
 cask 'emacs'
+cask 'lastpass'
 cask 'iterm2'
 cask 'karabiner-elements'
+cask 'kindle'
 cask 'google-chrome'
 cask 'google-japanese-ime'
 cask 'slack'
@@ -67,6 +69,7 @@ cask 'skitch'
 cask 'the-unarchiver'
 cask 'visual-studio-code'
 cask 'wireshark'
+cask 'xmind'
 
 # AppStore Applications
 mas "LINE", id: 539883307
