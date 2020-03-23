@@ -11,6 +11,7 @@
 .config/karabiner/automatic_backups
 .config/wireshark/
 .config/direnv/
+.config/blogsync/
 bin/
 Brewfile.lock.json
 update-notifier-npm.json
