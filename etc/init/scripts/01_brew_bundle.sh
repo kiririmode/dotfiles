@@ -28,7 +28,7 @@ if [ ! -f Brewfile ]; then
     brew bundle dump
 fi
 
-brew bundle install --verbose --no-upgrade
+brew bundle install --verbose
 brew bundle cleanup --force
 brew cleanup --verbose
 
