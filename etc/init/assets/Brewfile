@@ -30,6 +30,7 @@ brew 'weaveworks/tap/eksctl'
 # fonts
 tap 'sanemat/font'
 brew 'sanemat/font/ricty', args: ['with-powerline']
+brew 'homebrew/cask-fonts/font-myrica'
 
 # Shell integrations
 brew 'reattach-to-user-namespace'
