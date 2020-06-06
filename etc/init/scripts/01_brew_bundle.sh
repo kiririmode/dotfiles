@@ -29,7 +29,7 @@ if [ ! -f Brewfile ]; then
 fi
 
 brew bundle install --verbose
-brew bundle cleanup --force
+# brew bundle cleanup --force
 brew cleanup --verbose
 
 log_pass "brew: installed successfully"
