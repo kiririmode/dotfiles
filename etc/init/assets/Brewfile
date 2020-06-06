@@ -49,10 +49,10 @@ brew 'jenv'
 brew 'direnv'
 brew 'nodenv'
 brew 'tfenv'
+brew 'tflint'
 brew 'goenv', args: ['HEAD']
 
 # Cask Applications
-cask '1password'
 cask 'alfred'
 cask 'caffeine'
 cask 'docker'
