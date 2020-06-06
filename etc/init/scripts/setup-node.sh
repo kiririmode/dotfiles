@@ -11,7 +11,7 @@ readonly NODE_VERSION=13.2.0
 if nodenv versions | grep ${NODE_VERSION} >/dev/null; then
     : # noop
 else
-    nodenv install $(NODE_VERSION)
+    nodenv install ${NODE_VERSION}
     nodenv rehash
 fi
 

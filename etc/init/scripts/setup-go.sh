@@ -11,7 +11,7 @@ readonly GO_VERSION=1.13.5
 if goenv versions | grep ${GO_VERSION} >/dev/null; then
     : # noop
 else
-    goenv install $(GO_VERSION)
+    goenv install ${GO_VERSION}
     goenv rehash
 fi
 
