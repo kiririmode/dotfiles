@@ -30,6 +30,7 @@ brew 'weaveworks/tap/eksctl'
 # fonts
 tap 'sanemat/font'
 brew 'sanemat/font/ricty', args: ['with-powerline']
+tap 'homebrew/cask-fonts'
 brew 'homebrew/cask-fonts/font-myrica'
 
 # Shell integrations
@@ -56,7 +57,7 @@ brew 'goenv', args: ['HEAD']
 cask 'alfred'
 cask 'caffeine'
 cask 'docker'
-cask 'dash'
+# cask 'dash'
 cask 'dropbox'
 cask 'emacs'
 cask 'lastpass'
