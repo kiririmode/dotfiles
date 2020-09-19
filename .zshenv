@@ -85,7 +85,7 @@ export LC_ALL="${LANGUAGE}"
 export LC_CTYPE="{LANGUAGE}"
 
 ### Editor
-export EDITOR=emacsclient
+export EDITOR="code --wait"
 export SVN_EDITOR=${EDITOR}
 export GIT_EDITOR=${EDITOR}
 
