@@ -6,7 +6,7 @@ set -eu
 
 . "$DOTPATH"/etc/lib/vital.sh
 
-readonly GO_VERSION=1.13.5
+readonly GO_VERSION=1.14.4
 
 if goenv versions | grep ${GO_VERSION} >/dev/null; then
     : # noop
