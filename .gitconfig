@@ -59,3 +59,7 @@
 	#   Use "patience diff" algorithm when generating patches.
 	algorithm = patience
 
+[rebase]
+	autostash = true
+	autosqaush = true
+	abbreviateCommands = true
