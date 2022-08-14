@@ -73,6 +73,8 @@ cask 'visual-studio-code'
 cask 'wireshark'
 cask 'xmind'
 cask 'drawio'
+cask 'omnifocus'
+cask 'spotify'
 
 # Application
 cask '1password'
