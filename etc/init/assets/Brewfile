@@ -25,6 +25,7 @@ brew 'mas'
 brew 'awscli'
 brew 'grpcurl'
 brew 'direnv'
+brew 'postgresql@13'
 
 tap 'weaveworks/tap'
 
