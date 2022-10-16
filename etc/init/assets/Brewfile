@@ -78,8 +78,7 @@ cask 'omnifocus'
 cask 'spotify'
 cask 'box-tools'
 cask 'dbeaver-community'
-
-# Application
+cask 'avast-security'
 cask '1password'
 
 # AppStore Applications
