@@ -15,6 +15,8 @@ source $DOTPATH/etc/lib/vital.sh
 #       first occurrence of each duplicated value.
 typeset -gx -U path cdpath fpath manpath
 
+prepend FPATH "$HOMEBREW_PREFIX/share/zsh/functions"
+prepend FPATH "$HOMEBREW_PREFIX/share/zsh/site-functions"
 
 ### autoload
 
@@ -139,6 +141,7 @@ path=(
     $HOME/.plenv/bin(N-/)
     $HOME/.pyenv/bin(N-/)
     $HOME/.rbenv/bin(N-/)
+    $HOME/.jenv/bin(N-/)
     $GOPATH/bin(N-/)
     $path
 )

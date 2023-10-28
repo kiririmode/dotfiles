@@ -14,10 +14,10 @@ function install_tpm() {
 
     if [[ -d "$install_dir" ]]; then
         log_info "$install_dir already exists.  delete it."
-        rm -rf $install_dir
+        rm -rf "$install_dir"
     fi
-    git clone https://github.com/tmux-plugins/tpm $install_dir
+    git clone https://github.com/tmux-plugins/tpm "$install_dir"
 }
 
-install_tpm;
+install_tpm
 log_pass "install Tmux Plugin Manager"

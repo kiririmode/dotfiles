@@ -14,7 +14,6 @@ fi
 path=(
     $(brew --prefix coreutils)/libexec/gnubin(N-/)
     $(brew --prefix findutils)/libexec/gnubin(N-/)
-    $(brew --prefix postgresql@13)/bin
     $HOME/bin
     $path
 )

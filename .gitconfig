@@ -1,65 +1,69 @@
 [include]
-	path = ~/.gitconfig.local
+path = ~/.gitconfig.local
 
 [core]
-	# Text viewer for use by Git commands
-	pager = less -q -R
+# Text viewer for use by Git commands
+pager = less -q -R
 
-	# Enable parallel index preload for operations like git diff
-	preloadindex = true
+# Enable parallel index preload for operations like git diff
+preloadindex = true
 
-	editor = code --wait
+editor = code --wait
 
 [color]
-	# This variable determines the default value for variables such as
-	# color.diff and color.grep that control the use of color per
-	# command family.
-	ui = auto
+# This variable determines the default value for variables such as
+# color.diff and color.grep that control the use of color per
+# command family.
+ui = auto
 
 [conf]
-	helper=osxkeychain
+helper=osxkeychain
 
 [credential "https://github.com"]
-	# If no username is set for a network authentication, use this
-	# username by default.
-	username=kiririmode
+# If no username is set for a network authentication, use this
+# username by default.
+username=kiririmode
 
 [help]
-	# Automatically correct and execute mistyped commands after
-	# waiting for the given number of deciseconds (0.1 sec).
-	autocorrect = 1
+# Automatically correct and execute mistyped commands after
+# waiting for the given number of deciseconds (0.1 sec).
+autocorrect = 1
 
 [user]
-	name  = kiririmode
-	email = kiririmode@gmail.com
+name = kiririmode
+email = kiririmode@gmail.com
 
 [push]
-	# Defines the action git push should take if no refspec is
-	# explicitly given.
-	default = simple
+# Defines the action git push should take if no refspec is
+# explicitly given.
+default = simple
 
 [merge]
-	# By default, Git does not create an extra merge commit when
-	# merging a commit that is a descendant of the current
-	# commit. Instead, the tip of the current branch is
-	# fast-forwarded. When set to false, this variable tells Git to
-	# create an extra merge commit in such a case (equivalent to
-	# giving the --no-ff option from the command line).
-	ff = true
+# By default, Git does not create an extra merge commit when
+# merging a commit that is a descendant of the current
+# commit. Instead, the tip of the current branch is
+# fast-forwarded. When set to false, this variable tells Git to
+# create an extra merge commit in such a case (equivalent to
+# giving the --no-ff option from the command line).
+ff = true
 
 [ghq]
-	root = /Users/kiririmode/src
+root = /Users/kiririmode/src
+[includeIf "gitdir:~/src/gitlab.insidesales-dev.com/sdrive/"]
+path = ~/.config/git/tis
 
 [alias]
-	graph = log --graph --branches --pretty=format:'%C(yellow)%h%C(cyan)%d%Creset %s %C(green)- %an, %cr%Creset'
+graph = log --graph --branches --pretty=format:'%C(yellow)%h%C(cyan)%d%Creset %s %C(green)- %an, %cr%Creset'
 
 [diff]
-	# Choose a diff algorithm.
-	# patience:
-	#   Use "patience diff" algorithm when generating patches.
-	algorithm = patience
+# Choose a diff algorithm.
+# patience:
+#   Use "patience diff" algorithm when generating patches.
+algorithm = patience
 
 [rebase]
-	autostash = true
-	autosqaush = true
-	abbreviateCommands = true
+autostash = true
+autosqaush = true
+abbreviateCommands = true
+[pull]
+	rebase = false

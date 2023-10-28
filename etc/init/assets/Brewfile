@@ -19,11 +19,9 @@ brew 'readline'
 brew 'ssh-copy-id'
 brew 'tree'
 brew 'watch'
-brew 'wget'
 brew 'ack'
 brew 'mas'
 brew 'awscli'
-brew 'grpcurl'
 brew 'direnv'
 brew 'postgresql@13'
 
@@ -34,6 +32,7 @@ tap 'sanemat/font'
 brew 'sanemat/font/ricty', args: ['with-powerline']
 tap 'homebrew/cask-fonts'
 cask 'font-myrica'
+cask 'font-fira-code-nerd-font'
 
 # Shell integrations
 brew 'reattach-to-user-namespace'
@@ -42,6 +41,7 @@ brew 'tmux'
 brew 'z'
 brew 'zplug'
 brew 'zsh'
+brew 'starship'
 
 # Programming languages
 brew 'clang-format'
@@ -78,7 +78,7 @@ cask 'omnifocus'
 cask 'spotify'
 cask 'box-tools'
 cask 'dbeaver-community'
-cask 'avast-security'
+# cask 'avast-security'
 cask '1password'
 
 # AppStore Applications
