@@ -56,14 +56,25 @@ path = ~/.config/git/tis
 graph = log --graph --branches --pretty=format:'%C(yellow)%h%C(cyan)%d%Creset %s %C(green)- %an, %cr%Creset'
 
 [diff]
+tool = difftastic
 # Choose a diff algorithm.
 # patience:
 #   Use "patience diff" algorithm when generating patches.
 algorithm = patience
+
+[difftool]
+# difftool を使う時に、プロンプトを出すかどうか
+prompt = false
+
+[difftool "difftastic"]
+cmd = difft "$LOCAL" "$REMOTE"
+
+[pager]
+difftool = true
 
 [rebase]
 autostash = true
 autosqaush = true
 abbreviateCommands = true
 [pull]
-	rebase = false
+rebase = false
