@@ -1,6 +1,3 @@
-tap 'homebrew/core'
-tap 'homebrew/cask'
-
 # tools
 brew 'ansifilter'
 brew 'coreutils'
