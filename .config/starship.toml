@@ -12,6 +12,7 @@ $nodejs\
 $golang\
 $java\
 $terraform\
+$python\
 [](fg:#212736 bg:#1d2230)\
 $time\
 $cmd_duration\
@@ -61,6 +62,11 @@ format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
 
 [golang]
 symbol = ""
+style = "bg:#212736"
+format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
+
+[python]
+symbol = '🐍'
 style = "bg:#212736"
 format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
 
