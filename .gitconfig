@@ -78,3 +78,5 @@ autosquash = true
 abbreviateCommands = true
 [pull]
 rebase = false
+[credential]
+	helper = store
