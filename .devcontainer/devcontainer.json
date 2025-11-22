@@ -2,7 +2,9 @@
   "name": "Dotfiles for kiririmode",
   "build": {
     "dockerfile": "Dockerfile",
-    "options": ["--no-cache"]
+    "options": [
+      "--no-cache"
+    ]
   },
   "mounts": [
     "source=${localEnv:HOME}/.claude,target=/home/vscode/.claude,type=bind,consistency=cached"
@@ -21,9 +23,12 @@
         "files.insertFinalNewline": true,
         "files.trimFinalNewlines": true,
         "files.autoSave": "onFocusChange"
-      }
+      },
+      "extensions": [
+        "ms-vscode.makefile-tools"
+      ]
     }
   },
-  "postStartCommand": "curl -fsSL https://claude.ai/install.sh | bash",
+  "postStartCommand": "${containerWorkspaceFolder}/etc/scripts/claude-code.sh",
   "remoteUser": "vscode"
 }
