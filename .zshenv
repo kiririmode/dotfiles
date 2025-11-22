@@ -1,148 +1,164 @@
-##
-## .zshenv
-##
+#!/usr/bin/env zsh
+#
+# .zshenv - 環境変数設定ファイル
+#
+# このファイルはすべてのzshセッション（インタラクティブ・非インタラクティブ問わず）で
+# 最初に読み込まれる。PATH、エディタ、ロケールなど基本的な環境変数を設定する。
+#
+# 読み込み順序: .zshenv → .zprofile → .zshrc → .zlogin
+#
 
-# import common functions
-source $HOME/.path
-source $DOTPATH/etc/lib/vital.sh
+# ==============================================================================
+# 基本設定の読み込み
+# ==============================================================================
 
-# typeset:
-#   -g: The -g (global) means that any resulting parameter will not be
-#       restricted to local scope.
-#   -x: Mark  for  automatic  export  to the environment of
-#       subsequently executed commands.
-#   -U: For  arrays (but not for associative arrays), keep only the
-#       first occurrence of each duplicated value.
+# dotfilesのパス設定を読み込み（$DOTPATH環境変数を設定）
+source "$HOME/.path"
+
+# 共通ユーティリティ関数を読み込み（get_os, logging等）
+source "$DOTPATH/etc/lib.sh"
+
+# ==============================================================================
+# PATH配列の重複除去設定
+# ==============================================================================
+# typeset オプション:
+#   -g: グローバルスコープで宣言（関数内でもローカルにならない）
+#   -x: 環境変数としてエクスポート（子プロセスに継承）
+#   -U: 配列の重複要素を自動的に除去（最初の出現のみ保持）
 typeset -gx -U path cdpath fpath manpath
 
+# ==============================================================================
+# FPATH設定（zsh関数・補完関数の検索パス）
+# ==============================================================================
+
+# Homebrewのzsh関数パスを追加（補完機能等に必要）
 prepend FPATH "$HOMEBREW_PREFIX/share/zsh/functions"
 prepend FPATH "$HOMEBREW_PREFIX/share/zsh/site-functions"
 
-### autoload
+# ==============================================================================
+# autoload（遅延読み込み関数の登録）
+# ==============================================================================
+# autoload オプション:
+#   -U: エイリアス展開を抑制（関数定義の安全性を確保）
+#   -z: zsh形式で関数を読み込み
 
-# Push the buffer onto the buffer stack, and execute the command
-# `run-help cmd', where cmd is the current command.
-#   Key: ESC-h
+# run-help: ESC-h でカーソル位置のコマンドのヘルプを表示
 autoload -Uz run-help
 
-# The shell function add-zsh-hook provides a simple way of adding or
-# removing functions from the array.
-# hook is one of chpwd, periodic, precmd, preexec, zshaddhistory,
-# zshexit, or zsh_directory_name, the special functions in question.
+# add-zsh-hook: chpwd, precmd, preexec等のフック関数を簡単に登録
 autoload -Uz add-zsh-hook
 
-# This function  initializes  several associative arrays to map color
-# names to (and from) the ANSI standard eight-color terminal codes.
-# These are used by the prompt theme system.  You seldom should need
-# to run colors more than once.
+# colors: ANSIカラーコードを$fg, $bg等の連想配列で使用可能に
 autoload -Uz colors && colors
+
+# compinit: 補完システムの初期化（-u: 安全でないファイルの警告を抑制）
 autoload -Uz compinit && compinit -u
 
-# Perform  a  greater-than-or-equal-to  comparison of two strings
-# having the format of a zsh version number; that is, a string of
-# numbers and text with segments separated by dots or dashes.  If the
-# present string is not provided, $ZSH_VERSION is used.
+# is-at-least: zshバージョン比較関数（バージョン依存の設定に使用）
 autoload -Uz is-at-least
 
-### zsh
+# ==============================================================================
+# zsh基本設定
+# ==============================================================================
 
-# If set, is treated as a pattern during spelling correction.  Any
-# potential correction that matches the pattern is ignored.
+# --- スペル修正 ---
+# スペル修正候補から除外するパターン（アンダースコア始まりの内部関数等）
 export CORRECT_IGNORE='_*'
-
-# If  set, is treated as a pattern during spelling correction of
-# file names.  Any file name that matches the pattern is never offered
-# as a correction.
 export CORRECT_IGNORE_FILE='.*'
 
-# The  maximum  number of events stored in the internal history list.
+# --- ヒストリ設定 ---
+# メモリ上に保持するヒストリ数
 export HISTSIZE=10000
-
-# The file to save the history in when an interactive shell exits.  If
-# unset, the history is not saved.
-export HISTFILE=~/.zsh_history
-
-# The maximum number of history events to save in the history file.
+# ヒストリファイルのパス
+export HISTFILE="$HOME/.zsh_history"
+# ファイルに保存するヒストリ数（大きめに設定して履歴を多く残す）
 export SAVEHIST=1000000
 
-# Do not add in root
+# セキュリティ: rootユーザーはヒストリを保存しない
 if [[ $UID == 0 ]]; then
     unset HISTFILE
     export SAVEHIST=0
 fi
 
-# In the line editor, the number of matches to list without asking
-# first.
+# --- 補完表示 ---
+# 補完候補をこの数以下なら確認なしで一覧表示
 export LISTMAX=50
 
-# If nonnegative, commands whose combined user and system execution
-# times (measured in seconds) are greater than this value have timing
-# statistics printed for them.
+# --- 実行時間レポート ---
+# この秒数以上かかったコマンドは実行時間を自動表示
 export REPORTTIME=5
 
-### Language
+# ==============================================================================
+# ロケール設定
+# ==============================================================================
+
 export LANGUAGE="ja_JP.UTF-8"
-export LANG="${LANGUAGE}"
-export LC_ALL="${LANGUAGE}"
-export LC_CTYPE="{LANGUAGE}"
+export LANG="$LANGUAGE"
+export LC_ALL="$LANGUAGE"
+export LC_CTYPE="$LANGUAGE"
 
-### Editor
+# ==============================================================================
+# エディタ設定
+# ==============================================================================
+
+# デフォルトエディタ（VS Codeを使用、--waitで編集完了を待機）
 export EDITOR="code --wait"
-export SVN_EDITOR=${EDITOR}
-export GIT_EDITOR=${EDITOR}
+export VISUAL="$EDITOR"
+export SVN_EDITOR="$EDITOR"
+export GIT_EDITOR="$EDITOR"
 
-### PAGER
+# ==============================================================================
+# ページャー設定（less）
+# ==============================================================================
 
-export PAGER=less
-# --RAW-CONTROL-CHARS:
-#   Like  -r, but only ANSI "color" escape sequences are output in
-#   "raw" form.  Unlike -r, the screen appearance is maintained
-#   correctly in most cases.
-# --force:
-#   Forces  non-regular  files  to  be  opened.  (A non-regular file
-#   is a directory or a device special file.)
-# --no-init
-#   Disables  sending  the termcap initialization and deinitialization
-#   strings to the terminal.
-# --ignore-case:
-#   Causes searches to ignore case; that is, uppercase and lowercase
-#   are considered identical.
-# --LONG-PROMPT
-#   Causes less to prompt even more verbosely than more.
-# --HILITE-UNREAD
-#   Like -w, but temporarily highlights the first new line after any
-#   forward movement command larger than one line.
-# --quit-if-one-screen
-# Causes less to automatically exit if the entire file can be
-# displayed on the first screen.
-export LESS='--RAW-CONTROL-CHARS --force --no-init --ignore-case --LONG-PROMPT --HILITE-UNREAD --quit-if-one-screen'
-# Selects a predefined character set.
+export PAGER="less"
+
+# lessのデフォルトオプション
+#   -R (--RAW-CONTROL-CHARS): ANSIカラーエスケープを解釈して表示
+#   -f (--force): 特殊ファイル（ディレクトリ等）も強制的に開く
+#   -X (--no-init): 終了時に画面をクリアしない
+#   -i (--ignore-case): 検索時に大文字小文字を区別しない
+#   -M (--LONG-PROMPT): 詳細なプロンプトを表示
+#   -W (--HILITE-UNREAD): スクロール後の新しい行をハイライト
+#   -F (--quit-if-one-screen): 1画面に収まる場合は即終了
+export LESS='-R -f -X -i -M -W -F'
+
+# less用文字エンコーディング
 export LESSCHARSET='utf-8'
-# LESS man page colors (makes Man pages more readable).
-export LESS_TERMCAP_mb=$'\E[01;31m'
-export LESS_TERMCAP_md=$'\E[01;31m'
-export LESS_TERMCAP_me=$'\E[0m'
-export LESS_TERMCAP_se=$'\E[0m'
-export LESS_TERMCAP_so=$'\E[00;44;37m'
-export LESS_TERMCAP_ue=$'\E[0m'
-export LESS_TERMCAP_us=$'\E[01;32m'
 
-### ls
+# manページのカラー表示設定（LESS_TERMCAP_*）
+export LESS_TERMCAP_mb=$'\E[01;31m'    # 点滅開始（赤太字）
+export LESS_TERMCAP_md=$'\E[01;31m'    # 太字開始（赤太字）
+export LESS_TERMCAP_me=$'\E[0m'        # 太字・点滅終了
+export LESS_TERMCAP_se=$'\E[0m'        # 強調表示終了
+export LESS_TERMCAP_so=$'\E[00;44;37m' # 強調表示開始（青背景白文字）
+export LESS_TERMCAP_ue=$'\E[0m'        # 下線終了
+export LESS_TERMCAP_us=$'\E[01;32m'    # 下線開始（緑太字）
 
-# ls command colors
+# ==============================================================================
+# lsコマンドのカラー設定
+# ==============================================================================
+
+# BSD ls用（macOS）: LSCOLORS
 export LSCOLORS=exfxcxdxbxegedabagacad
+
+# GNU ls用（Linux）: LS_COLORS
 export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
 
-### settings for golang
-export GOPATH=$HOME
+# ==============================================================================
+# 言語環境設定
+# ==============================================================================
 
-### Path settings
+# Go言語: GOPATHをホームディレクトリに設定
+export GOPATH="$HOME"
+
+# ==============================================================================
+# PATH設定
+# ==============================================================================
+# (N-/): グロブ修飾子 - ディレクトリが存在しない場合は空文字に展開（エラー回避）
+
 path=(
-    $HOME/.plenv/bin(N-/)
-    $HOME/.pyenv/bin(N-/)
-    $HOME/.rbenv/bin(N-/)
-    $HOME/.jenv/bin(N-/)
-    $GOPATH/bin(N-/)
+    "$GOPATH/bin"(N-/)          # Go binaries
     $path
 )
 
@@ -150,17 +166,12 @@ manpath=(
     $manpath
 )
 
-### xenv settings
-for xenv in pyenv plenv rbenv jenv; do
-    if (( $+commands[$xenv] )); then
-        path=($($xenv root)/shims $path)
-        eval "$(SHELL=zsh $xenv init - --no-rehash)"
-    fi
-done
+# ==============================================================================
+# OS固有の設定読み込み
+# ==============================================================================
 
-### os dependent settings
 case "$(get_os)" in
     mac)
-        source $HOME/.zsh.d/mac.zshenv
+        [[ -f "$HOME/.zsh.d/mac.zshenv" ]] && source "$HOME/.zsh.d/mac.zshenv"
         ;;
 esac
