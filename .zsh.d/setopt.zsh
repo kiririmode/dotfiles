@@ -1,162 +1,181 @@
-### NO_GLOBAL_RCS can force /etc/z* files after /etc/zshenv to be skipped.
+#!/usr/bin/env zsh
+#
+# setopt.zsh - zshオプション設定
+#
+# zshの動作を制御する各種オプションを設定する。
+# setopt でオプションを有効化、unsetopt または setopt no_<option> で無効化。
+#
+
+# ==============================================================================
+# システム設定
+# ==============================================================================
+
+# /etc/zshrc等のグローバル設定ファイルの読み込みをスキップ
+# 環境の一貫性を保つため、dotfilesの設定のみを使用
 setopt no_global_rcs
 
-# Report the status of background jobs immediately, rather than
-# waiting until just before printing a prompt.
-setopt notify
+# ==============================================================================
+# ヒストリ設定
+# ==============================================================================
 
-# Don't push multiple copies of the same directory onto the directory
-# stack.
-setopt pushd_ignore_dups
-
-# Have pushd with no arguments act like `pushd $HOME'.
-setopt pushd_to_home
-
-# This options works like APPEND_HISTORY except that new history lines
-# are added to the $HISTFILE incrementally (as soon as they are
-# entered),  rather  than waiting until the shell exits.
+# コマンド入力直後にヒストリファイルに追記（シェル終了を待たない）
+# 複数ターミナル間でヒストリを即時共有
 setopt inc_append_history
 
-# Remove  the  history (fc -l) command from the history list when
-# invoked.  Note that the command lingers in the internal history
-# until the next command is entered before it vanishes, allowing you
-# to briefly reuse or edit the line.
-setopt hist_no_store
-
-# Remove function definitions from the history list.
-setopt hist_no_functions
-
-# Save each command's beginning timestamp (in seconds since the epoch)
-# and the duration (in seconds) to the  history  file.
-setopt extended_history
-
-# When searching for history entries in the line editor, do not
-# display duplicates of a line previously found, even if the
-# duplicates are not contiguous.
-setopt hist_find_no_dups
-
-# Remove command lines from the history list when the first character
-# on the line is a space, or when one of the expanded aliases contains
-# a leading space.
-setopt hist_ignore_space
-
-# Remove superfluous blanks from each command line being added to the
-# history list.
-setopt hist_reduce_blanks
-
-# Whenever the user enters a line with history expansion, don't
-# execute the line directly; instead, perform history expansion and
-# reload the line into the editing buffer.
-setopt hist_verify
-
-# This option both imports new commands from the history file, and
-# also causes your typed commands to be appended to the  history file.
+# ヒストリを複数のzshセッション間で共有
+# 他のターミナルで実行したコマンドも即座に参照可能
 setopt share_history
 
-# Make the echo builtin compatible with the BSD echo(1) command.  This
-# disables backslashed  escape  sequences  in  echo  strings unless
-# the -e option is specified.
+# タイムスタンプと実行時間をヒストリに記録
+# 形式: ": <開始時刻>:<実行秒数>;<コマンド>"
+setopt extended_history
+
+# `history` コマンド自体はヒストリに残さない
+setopt hist_no_store
+
+# 関数定義はヒストリに残さない
+setopt hist_no_functions
+
+# ヒストリ検索時に重複を表示しない
+setopt hist_find_no_dups
+
+# スペースで始まるコマンドはヒストリに残さない
+# 一時的に秘密のコマンドを実行したい場合に便利
+setopt hist_ignore_space
+
+# コマンドの余分な空白を除去してからヒストリに保存
+setopt hist_reduce_blanks
+
+# ヒストリ展開（!!, !$等）は即実行せず、展開結果を編集可能にする
+setopt hist_verify
+
+# ==============================================================================
+# ディレクトリ操作
+# ==============================================================================
+
+# pushdで同じディレクトリを重複してスタックに積まない
+setopt pushd_ignore_dups
+
+# 引数なしのpushdは$HOMEに移動（cdと同じ動作）
+setopt pushd_to_home
+
+# ==============================================================================
+# ジョブ制御
+# ==============================================================================
+
+# バックグラウンドジョブの状態変化を即座に通知
+# プロンプト表示を待たずに完了/停止を報告
+setopt notify
+
+# jobsコマンドでPIDも表示（詳細な情報を提供）
+setopt long_list_jobs
+
+# ==============================================================================
+# 入出力
+# ==============================================================================
+
+# echoコマンドをBSD互換モードに
+# エスケープシーケンスは-eオプション指定時のみ解釈
 setopt bsd_echo
 
-# Remove any right prompt from display when accepting a command line.
-setopt transient_rprompt
-
-# If  set,  parameter  expansion,  command  substitution and
-# arithmetic expansion are performed in prompts.
-setopt prompt_subst
-
-# Allow comments even in interactive shells.
-setopt interactive_comments
-
-# Automatically list choices on an ambiguous completion.
-setopt auto_list
-
-# Automatically  use  menu  completion  after  the second consecutive
-# request for completion, for example by pressing the tab key
-# repeatedly.
-setopt auto_menu
-
-# When  the last character resulting from a completion is a slash and
-# the next character typed is a word delimiter, a slash, or a
-# character that ends a command (such as a semicolon or an ampersand),
-# remove the slash.
-setopt auto_remove_slash
-
-# Print  a carriage return just before printing a prompt in the line
-# editor.
-setopt no_prompt_cr
-
-# If a parameter name was completed and a following character
-# (normally a space) automatically inserted, and the  next  character
-# typed  is  one  of  those that have to come directly after the name
-# (like `}', `:', etc.), the automatically added character is deleted,
-# so that the character typed comes immediately after the parameter
-# name.
-setopt auto_param_keys
-
-# If a parameter is completed whose content is the name of a
-# directory, then add a trailing slash instead of a space.
-setopt auto_param_slash
-
-# When listing files that are possible completions, show the type of
-# each file with a trailing identifying mark.
-setopt list_types
-
-# If unset, key functions that list completions try to return to the
-# last prompt if given a numeric argument.
-setopt always_last_prompt
-
-# All  unquoted  arguments  of  the form `anything=expression'
-# appearing after the command name have filename expansion (that is,
-# where expression has a leading `~' or `=') performed on expression
-# as if it were a parameter assignment.
-setopt magic_equal_subst
-
-# Expand expressions in braces which would not otherwise undergo brace
-# expansion to a lexically ordered list of all  the  characters.
-setopt brace_ccl
-
-# Perform filename generation (globbing).
-setopt glob
-
-# Treat  the  `#', `~' and `^' characters as part of patterns for
-# filename generation, etc.
-setopt extended_glob
-
-# Make globbing (filename generation) sensitive to case.
-setopt no_case_glob
-
-# Print eight bit characters literally in completion lists, etc.
+# 8ビット文字（日本語等）を正しく表示
 setopt print_eight_bit
 
-# Beep on error in ZLE.
-setopt no_beep
-
-# Beep on an ambiguous completion.  More accurately, this forces the
-# completion widgets to return status 1 on an  ambiguous  completion,
-# which  causes  the  shell to beep if the option BEEP is also set;
-setopt no_list_beep
-
-# Beep in ZLE when a widget attempts to access a history entry which
-# isn't there.
-setopt no_hist_beep
-
-# Append a trailing `/' to all directory names resulting from filename
-# generation (globbing)
-setopt mark_dirs
-
-# Perform a path search even on command names with slashes in them.
-setopt path_dirs
-
-# Print  the exit value of programs with non-zero exit status.
+# 終了ステータスが0以外のコマンドは終了コードを表示
 setopt print_exit_value
 
-# Print commands and their arguments as they are executed.
+# xtraceを無効化（デバッグ用のコマンド出力を抑制）
 setopt no_xtrace
 
-# If  querying  the  user  before executing `rm *' or `rm path/*',
-# first wait ten seconds and ignore anything typed in that time.
-setopt rm_star_wait
+# ==============================================================================
+# プロンプト設定
+# ==============================================================================
 
-# List jobs in the long format by default.
-setopt long_list_jobs
+# コマンド実行後に右プロンプト(RPROMPT)を消去
+# コピペ時に邪魔にならない
+setopt transient_rprompt
+
+# プロンプト文字列内で変数展開・コマンド置換を有効化
+setopt prompt_subst
+
+# プロンプト表示前にキャリッジリターンを出力しない
+setopt no_prompt_cr
+
+# ==============================================================================
+# 補完設定
+# ==============================================================================
+
+# 曖昧な補完で候補を自動的にリスト表示
+setopt auto_list
+
+# 2回目のTab押下から自動的にメニュー補完モードに入る
+setopt auto_menu
+
+# 補完後のスラッシュは、次の入力が区切り文字なら自動削除
+setopt auto_remove_slash
+
+# パラメータ名補完後、続く文字（}, :等）の前の自動挿入文字を削除
+setopt auto_param_keys
+
+# ディレクトリ名を含むパラメータ補完時、末尾にスラッシュを追加
+setopt auto_param_slash
+
+# 補完候補にファイルタイプを示すマーク（/, *, @等）を表示
+setopt list_types
+
+# 補完後は常に最後のプロンプト位置に戻る
+setopt always_last_prompt
+
+# ==============================================================================
+# グロブ・パターンマッチング
+# ==============================================================================
+
+# グロブ（ファイル名展開）を有効化
+setopt glob
+
+# 拡張グロブを有効化（#, ~, ^をパターンとして使用可能）
+# 例: ^*.txt（.txt以外）、**/*.js（再帰検索）
+setopt extended_glob
+
+# グロブで大文字小文字を区別しない
+setopt no_case_glob
+
+# ディレクトリにマッチした場合、末尾に/を付加
+setopt mark_dirs
+
+# スラッシュを含むコマンド名でもPATH検索を実行
+setopt path_dirs
+
+# `foo=~/bar` のような形式でもチルダ展開を実行
+setopt magic_equal_subst
+
+# ブレース展開を拡張（{a-z}で連続文字を展開）
+setopt brace_ccl
+
+# ==============================================================================
+# コメント
+# ==============================================================================
+
+# インタラクティブシェルでも#以降をコメントとして扱う
+# コマンドラインでメモを残したい場合に便利
+setopt interactive_comments
+
+# ==============================================================================
+# ビープ音
+# ==============================================================================
+
+# ZLEでのエラー時にビープ音を鳴らさない
+setopt no_beep
+
+# 曖昧な補完時にビープ音を鳴らさない
+setopt no_list_beep
+
+# 存在しないヒストリにアクセス時にビープ音を鳴らさない
+setopt no_hist_beep
+
+# ==============================================================================
+# 安全性
+# ==============================================================================
+
+# `rm *` や `rm path/*` 実行時、10秒間入力を無視して確認を促す
+setopt rm_star_wait
