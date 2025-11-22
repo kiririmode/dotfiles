@@ -1,32 +1,46 @@
+# ローカル環境固有の設定を読み込む（ユーザー名やメールアドレス等）
 [include]
 path = ~/.gitconfig.local
 
 [core]
-# Text viewer for use by Git commands
+# Git コマンドの出力を表示するページャー（less）の設定
+# -q: ベル音を抑制, -R: ANSIカラーコードをそのまま出力
 pager = less -q -R
 
-# Enable parallel index preload for operations like git diff
+# git diff 等の操作時にインデックスを並列で先読みし、パフォーマンスを向上
 preloadindex = true
 
+# コミットメッセージ編集時に使用するエディタ
 editor = code --wait
 
+# ファイルシステムキャッシュを有効化（特にWindowsで効果大）
+fscache = true
+
+# ファイル名の大文字小文字の変更を検出
+# macOS/Windows では false がデフォルトだが、true にすることで
+# Linux 環境との互換性問題を早期発見できる
+ignorecase = false
+
+[init]
+# git init 時のデフォルトブランチ名
+# 「master」から「main」への移行が業界標準
+defaultBranch = main
+
 [color]
-# This variable determines the default value for variables such as
-# color.diff and color.grep that control the use of color per
-# command family.
+# diff, status, branch 等のコマンド出力に自動で色付け
 ui = auto
 
 [conf]
+# macOS のキーチェーンを認証情報ヘルパーとして使用
 helper=osxkeychain
 
 [credential "https://github.com"]
-# If no username is set for a network authentication, use this
-# username by default.
+# GitHub への認証時にデフォルトで使用するユーザー名
 username=kiririmode
 
 [help]
-# Automatically correct and execute mistyped commands after
-# waiting for the given number of deciseconds (0.1 sec).
+# コマンドをタイプミスした際、0.1秒後に自動修正して実行
+# （値は0.1秒単位。1 = 0.1秒）
 autocorrect = 1
 
 [user]
@@ -34,49 +48,160 @@ name = kiririmode
 email = kiririmode@gmail.com
 
 [push]
-# Defines the action git push should take if no refspec is
-# explicitly given.
+# git push 時にリモートブランチを明示しない場合の挙動
+# simple: 現在のブランチを同名のリモートブランチにプッシュ（安全な設定）
 default = simple
 
+# ローカルで作成したタグを自動的にプッシュ
+followTags = true
+
+# push 時に上流ブランチが設定されていなければ自動設定
+autoSetupRemote = true
+
+[fetch]
+# fetch 時にリモートで削除されたブランチをローカルからも削除
+prune = true
+
+# fetch 時にリモートで削除されたタグをローカルからも削除
+pruneTags = true
+
+# 全リモートから並列でフェッチ（0 = CPU数に応じて自動設定）
+parallel = 0
+
 [merge]
-# By default, Git does not create an extra merge commit when
-# merging a commit that is a descendant of the current
-# commit. Instead, the tip of the current branch is
-# fast-forwarded. When set to false, this variable tells Git to
-# create an extra merge commit in such a case (equivalent to
-# giving the --no-ff option from the command line).
+# fast-forward マージの設定
+# true: 可能な場合は fast-forward マージを行う（マージコミットを作らない）
+# false に設定すると、常にマージコミットを作成（--no-ff 相当）
 ff = true
 
+# コンフリクト時に共通祖先も表示（diff3形式）
+# <<<<<<< HEAD / ||||||| base / >>>>>>> branch の3分割表示になり
+# コンフリクト解決が容易になる
+conflictstyle = zdiff3
+
+[branch]
+# 新しいブランチ作成時、自動的に rebase を設定
+# pull 時に余計なマージコミットを防ぐ
+autosetuprebase = always
+
+# ブランチをソートする際、最近コミットしたブランチを上に表示
+sort = -committerdate
+
+[tag]
+# タグをソートする際、セマンティックバージョニングを考慮
+# v1.9 < v1.10 のように正しくソート
+sort = version:refname
+
 [ghq]
+# ghq でクローンしたリポジトリの保存先ディレクトリ
 root = /Users/kiririmode/src
-[includeIf "gitdir:~/src/gitlab.insidesales-dev.com/sdrive/"]
-path = ~/.config/git/tis
 
 [alias]
+# コミット履歴をグラフ形式で表示するエイリアス
+# 全ブランチをカラー表示（黄:ハッシュ, 水色:ブランチ名, 緑:作者と日時）
 graph = log --graph --branches --pretty=format:'%C(yellow)%h%C(cyan)%d%Creset %s %C(green)- %an, %cr%Creset'
 
+# 直前のコミットを修正（ステージされた変更を追加）
+amend = commit --amend --no-edit
+
+# 作業ツリーの状態を簡潔に表示
+st = status --short --branch
+
+# 全ブランチの一覧を最終コミット日時付きで表示
+branches = branch -a --sort=-committerdate --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:green)%(committerdate:relative)%(color:reset) %(color:blue)%(authorname)%(color:reset)'
+
+# 直前のコミットを取り消し（変更は保持）
+undo = reset --soft HEAD~1
+
+# ステージされていない変更を全て破棄
+discard = checkout -- .
+
+# 今日の自分のコミットを表示
+today = log --since=midnight --author='kiririmode' --oneline
+
 [diff]
+# diff 表示に使用するツール
 tool = difftastic
-# Choose a diff algorithm.
-# patience:
-#   Use "patience diff" algorithm when generating patches.
-algorithm = patience
+
+# diff アルゴリズムの選択
+# histogram: patience の改良版。より高速で、より良い差分を生成
+algorithm = histogram
+
+# ファイル名変更の検出を有効化
+renames = copies
+
+# サブモジュールの差分をログ形式で表示
+submodule = log
+
+# 空白文字の変更を色付けして目立たせる
+colorMoved = default
+colorMovedWS = allow-indentation-change
 
 [difftool]
-# difftool を使う時に、プロンプトを出すかどうか
+# difftool 起動時に確認プロンプトを表示しない
 prompt = false
 
+# difftastic を difftool として設定
 [difftool "difftastic"]
 cmd = difft "$LOCAL" "$REMOTE"
 
 [pager]
+# difftool の出力をページャーで表示
 difftool = true
 
 [rebase]
+# rebase 開始時に未コミットの変更を自動で stash し、完了後に戻す
 autostash = true
+
+# fixup! や squash! で始まるコミットを自動で並び替え
 autosquash = true
+
+# rebase -i のコマンド表記を省略形で表示（pick → p 等）
 abbreviateCommands = true
+
+# rebase 中に不要になった空コミットを自動削除
+updateRefs = true
+
 [pull]
+# git pull 時の挙動
+# false: マージ方式（rebase しない）
 rebase = false
+
+[status]
+# サブモジュールの変更サマリーを表示
+submoduleSummary = true
+
+# 未追跡ファイルを個別に表示（ディレクトリ単位ではなく）
+showUntrackedFiles = all
+
+[log]
+# ログ表示時に日付を ISO 8601 形式で表示
+date = iso
+
+[rerere]
+# Reuse Recorded Resolution: コンフリクト解決を記録し、同じコンフリクトを自動解決
+enabled = true
+
+# rerere で自動解決したファイルを自動的にステージ
+autoupdate = true
+
+[commit]
+# コミット時に差分を表示（コミットメッセージ作成の参考に）
+verbose = true
+
+[transfer]
+# データ転送時にオブジェクトの整合性をチェック
+fsckObjects = true
+
+[fetch "fsck"]
+# fetch 時のオブジェクト整合性チェックを有効化
+zeroPaddedFilemode = ignore
+
+[receive]
+# push を受け取る際にオブジェクトの整合性をチェック
+fsckObjects = true
+
 [credential]
-	helper = store
+# 認証情報をファイルに平文で保存（~/.git-credentials）
+# 注意: セキュリティ上、共有マシンでは非推奨
+helper = store
