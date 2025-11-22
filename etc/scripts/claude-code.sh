@@ -20,9 +20,13 @@ if ! command -v claude &> /dev/null; then
     curl -fsSL https://claude.ai/install.sh | bash
 fi
 
-# マーケットプレイスの追加
-echo "Adding marketplace: ${MARKETPLACE_URL}"
-claude plugin marketplace add "${MARKETPLACE_URL}"
+# マーケットプレイスの追加（未インストールの場合のみ）
+if claude plugin marketplace list 2>/dev/null | grep -q "${MARKETPLACE_NAME}"; then
+    echo "Marketplace '${MARKETPLACE_NAME}' is already installed, skipping..."
+else
+    echo "Adding marketplace: ${MARKETPLACE_URL}"
+    claude plugin marketplace add "${MARKETPLACE_URL}"
+fi
 
 # プラグインのインストール
 for plugin in "${PLUGINS[@]}"; do
