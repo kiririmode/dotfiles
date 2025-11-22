@@ -6,7 +6,8 @@ set -eu
 
 . "$DOTPATH"/etc/lib.sh
 
-if [[ -d "${ZPLUG_HOME:-}" ]]; then
+ZPLUG_HOME="${ZPLUG_HOME:-$HOME/.zplug}"
+if [[ -d "$ZPLUG_HOME" ]]; then
     log_pass "zplug: already installed"
     exit 0
 fi

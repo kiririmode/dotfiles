@@ -11,11 +11,13 @@ function install_tpm() {
     local install_dir="$HOME/.tmux/plugins/tpm"
 
     if [[ -d "$install_dir" ]]; then
-        log_info "$install_dir already exists. delete it."
-        rm -rf "$install_dir"
+        log_pass "tpm: already installed"
+        exit 0
     fi
+
+    mkdir -p "$HOME/.tmux/plugins"
     git clone https://github.com/tmux-plugins/tpm "$install_dir"
 }
 
 install_tpm
-log_pass "install Tmux Plugin Manager"
+log_pass "tpm: installed successfully"
