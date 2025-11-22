@@ -1,5 +1,5 @@
 # tools
-brew 'asdf'
+brew 'mise'
 brew 'ansifilter'
 brew 'coreutils'
 brew 'curl'
@@ -45,17 +45,11 @@ brew 'starship'
 
 # Programming languages
 brew 'clang-format'
-brew 'plenv'
-brew 'pyenv'
-brew 'rbenv'
-brew 'jenv'
 brew 'direnv'
-brew 'nodenv'
+brew 'uv'
 brew 'terraform-docs'
 brew 'minamijoyo/tfupdate/tfupdate'
-brew 'tfenv'
 brew 'tflint'
-brew 'goenv', args: ['HEAD']
 
 # Cask Applications
 cask 'alfred'

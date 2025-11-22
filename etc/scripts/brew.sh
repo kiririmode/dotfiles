@@ -4,26 +4,24 @@
 trap 'echo Error: $0:$LINENO stopped; exit 1' ERR INT
 set -eu
 
-# Load vital library that is most important and constructed with many
-# minimal functions.
-. "$DOTPATH"/etc/lib/vital.sh
+. "$DOTPATH"/etc/lib.sh
 
 if ! is_osx; then
-    log_fail "error: this script is only supported with osx."
-    exit 1
+    log_pass "brew: skipped (not macOS)"
+    exit 0
 fi
 
 if has "brew"; then
     log_pass "brew already installed"
-    exit
+    exit 0
 fi
 
 if ! has "ruby"; then
     log_fail "error: require ruby"
-    exit
+    exit 1
 fi
 
-ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 if has "brew"; then
     brew doctor
 else

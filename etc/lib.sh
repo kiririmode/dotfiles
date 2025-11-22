@@ -106,6 +106,16 @@ function get_os() {
     done
 }
 
+# 環境変数の先頭にパスを追加（ディレクトリが存在する場合のみ）
+# Usage: prepend VAR_NAME /path/to/add
+function prepend() {
+    local var=$1
+    local value=$2
+    if [[ -d "$value" ]]; then
+        eval "$var=\"$value:\${$var}\""
+    fi
+}
+
 function has() {
     which "$1" > /dev/null 2>&1
     return $?

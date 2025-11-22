@@ -1,6 +1,6 @@
 DOTPATH    := $(realpath $(dir $(lastword $(MAKEFILE_LIST))))
 CANDIDATES := $(wildcard .??*) bin
-EXCLUSIONS := .DS_Store .git .gitmodules
+EXCLUSIONS := .DS_Store .git .gitmodules .devcontainer .config
 DOTFILES   := $(filter-out $(EXCLUSIONS), $(CANDIDATES))
 
 all: install
@@ -9,10 +9,18 @@ list:
 	@$(foreach val, $(DOTFILES), /bin/ls -dF $(val);)
 
 # Create a symbolic links of dotfiles to your home directory.
-deploy:
+deploy: deploy-config
 	@echo '===> Start to deploy dotfiles to home directory.'
 	@echo ''
 	@$(foreach val, $(DOTFILES), ln -sfnv $(abspath $(val)) $(HOME)/$(val);)
+
+# Create symbolic links for .config subdirectories individually
+# This avoids overwriting existing ~/.config directory
+CONFIG_ITEMS := git karabiner mise peco starship.toml
+deploy-config:
+	@echo '===> Deploying .config items...'
+	@mkdir -p $(HOME)/.config
+	@$(foreach val, $(CONFIG_ITEMS), ln -sfnv $(DOTPATH)/.config/$(val) $(HOME)/.config/$(val);)
 
 update:
 	git pull origin master
@@ -20,24 +28,39 @@ update:
 	git submodule update
 	git submodule foreach git pull origin master
 
-init:
-	@DOTPATH=$(DOTPATH) bash $(DOTPATH)/etc/init/init.sh
+# Initialize development environment
+init: brew brew-bundle fonts zplug tmux defaults
 
-node-setup:
-	$(DOTPATH)/etc/init/scripts/setup-node.sh
+brew:
+	@DOTPATH=$(DOTPATH) bash $(DOTPATH)/etc/scripts/brew.sh
 
-go-setup:
-	$(DOTPATH)/etc/init/scripts/setup-go.sh
+brew-bundle:
+	@DOTPATH=$(DOTPATH) bash $(DOTPATH)/etc/scripts/brew-bundle.sh
 
-install: update deploy init node-setup go-setup install-tools
-	@exec $$SHELL
+fonts:
+	@DOTPATH=$(DOTPATH) bash $(DOTPATH)/etc/scripts/fonts.sh
 
-install-tools: go-tools
+zplug:
+	@DOTPATH=$(DOTPATH) bash $(DOTPATH)/etc/scripts/zplug.sh
+
+tmux:
+	@DOTPATH=$(DOTPATH) bash $(DOTPATH)/etc/scripts/tmux.sh
+
+defaults:
+	@DOTPATH=$(DOTPATH) bash $(DOTPATH)/etc/scripts/defaults.sh
+
+mise-setup:
+	@DOTPATH=$(DOTPATH) bash $(DOTPATH)/etc/scripts/mise.sh
 
 go-tools:
-	$(DOTPATH)/etc/init/scripts/install-go-tools.sh
+	@DOTPATH=$(DOTPATH) bash $(DOTPATH)/etc/scripts/go-tools.sh
+
+install: update deploy init mise-setup go-tools
+	@exec $$SHELL
 
 clean:
-	@echo "Remove dotfiles in your home directory...'
-	@-$(foreach val, $(DOTFILES), rm -vrf $HOME/$(val);)
+	@echo 'Remove dotfiles in your home directory...'
+	@-$(foreach val, $(DOTFILES), rm -vrf $(HOME)/$(val);)
 	-rm -rf $(DOTPATH)
+
+.PHONY: all list deploy deploy-config update init brew brew-bundle fonts zplug tmux defaults mise-setup go-tools install clean
