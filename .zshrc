@@ -1,50 +1,116 @@
-###
-### .zshrc
-###
+#!/usr/bin/env zsh
+#
+# .zshrc - インタラクティブシェル設定ファイル
+#
+# このファイルはインタラクティブシェル（ターミナルで直接操作するシェル）でのみ読み込まれる。
+# キーバインド、エイリアス、プロンプト、補完設定などを行う。
+#
+# 読み込み順序: .zshenv → .zprofile → .zshrc → .zlogin
+#
 
+# ==============================================================================
+# セキュリティ・基本設定
+# ==============================================================================
+
+# ファイル作成時のデフォルトパーミッション
+# 022 = owner以外の書き込み権限を除去（ファイル: 644, ディレクトリ: 755）
 umask 022
 
-# Maximum size of a core dump.
+# コアダンプを無効化（セキュリティとディスク容量の観点から）
 limit coredumpsize 0
 
-# Delete all existing keymaps and reset to the default state.
+# ==============================================================================
+# キーバインド設定
+# ==============================================================================
+
+# 既存のキーマップをリセットしてクリーンな状態から開始
 bindkey -d
-# Selects  keymap  `emacs'  for  any  operations  by  the  current
-# command, and also links `emacs' to `main' so that it is selected by
-# default the next time the editor starts.
+
+# Emacsキーバインドを使用（Ctrl-A: 行頭、Ctrl-E: 行末、Ctrl-R: 履歴検索等）
+# viモードを使用したい場合は bindkey -v に変更
 bindkey -e
 
-# setting of DOTPATH
-if [[ -f $HOME/.path ]]; then
-    source $HOME/.path
+# ==============================================================================
+# 基本設定ファイルの読み込み
+# ==============================================================================
+
+# dotfilesのパス設定を読み込み（$DOTPATH環境変数を設定）
+if [[ -f "$HOME/.path" ]]; then
+    source "$HOME/.path"
 fi
 
-# import common functions
+# 共通ユーティリティ関数を読み込み（get_os, logging等）
 export VITAL_PATH="$DOTPATH/etc/lib/vital.sh"
 if [[ -f "$VITAL_PATH" ]]; then
     source "$VITAL_PATH"
 fi
 
-# run zsh configuration scripts
-for conf in $HOME/.zsh.d/*.zsh; do
-    source $conf
+# ==============================================================================
+# 機能別設定ファイルの読み込み
+# ==============================================================================
+
+# .zsh.d/配下の設定ファイルを読み込み
+# 含まれるファイル: alias.zsh, setopt.zsh, 言語環境設定等
+# (N): Null Glob - マッチするファイルがなくてもエラーにならない
+for conf in "$HOME"/.zsh.d/*.zsh(N); do
+    source "$conf"
 done
 
-# run os dependent zsh configuration scripts
-if [[ -r $HOME/.zsh.d/$(get_os).zshrc ]]; then
-    source $HOME/.zsh.d/$(get_os).zshrc
+# ==============================================================================
+# OS固有の設定読み込み
+# ==============================================================================
+
+# macOS: osx.zshrc, Linux: linux.zshrc 等
+# -r: ファイルが存在し、読み取り可能かチェック
+if [[ -r "$HOME/.zsh.d/$(get_os).zshrc" ]]; then
+    source "$HOME/.zsh.d/$(get_os).zshrc"
 fi
 
-function pe() {
-    ack "$@" . | peco --exec 'awk -F : '"'"'{print "+" $2 " " $1}'"'"' | xargs less -N '
-}
+# ==============================================================================
+# ユーティリティ関数
+# ==============================================================================
 
-eval "$(direnv hook zsh)"
+# pe: ack + peco によるインタラクティブファイル検索
+# 使用方法: pe <検索パターン>
+# 検索結果をpecoで絞り込み、選択したファイルをlessで表示
+if (( $+commands[ack] )) && (( $+commands[peco] )); then
+    function pe() {
+        ack "$@" . | peco --exec 'awk -F : '"'"'{print "+" $2 " " $1}'"'"' | xargs less -N '
+    }
+fi
 
+# ==============================================================================
+# 外部ツールの初期化
+# ==============================================================================
+
+# --- direnv ---
+# ディレクトリ移動時に.envrcを自動読み込み（プロジェクト別の環境変数管理）
+if (( $+commands[direnv] )); then
+    eval "$(direnv hook zsh)"
+fi
+
+# --- bash補完の互換性 ---
+# bash用の補完スクリプトをzshで使用可能にする
 autoload -U +X bashcompinit && bashcompinit
-complete -o nospace -C /opt/homebrew/Cellar/tfenv/3.0.0/versions/1.3.6/terraform terraform
 
-eval "$(starship init zsh)"
+# --- Terraform ---
+# Terraform CLIのタブ補完を有効化
+if (( $+commands[terraform] )); then
+    complete -o nospace -C "$(command -v terraform)" terraform
+fi
 
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+# --- Starship ---
+# 高速でカスタマイズ可能なクロスシェルプロンプト
+if (( $+commands[starship] )); then
+    eval "$(starship init zsh)"
+fi
 
+# ==============================================================================
+# ターミナル統合
+# ==============================================================================
+
+# iTerm2シェル統合（macOS）
+# コマンド履歴ナビゲーション、出力キャプチャ等の機能を提供
+if [[ -e "$HOME/.iterm2_shell_integration.zsh" ]]; then
+    source "$HOME/.iterm2_shell_integration.zsh"
+fi

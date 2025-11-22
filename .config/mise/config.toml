@@ -1,0 +1,28 @@
+# mise グローバル設定
+# https://mise.jdx.dev/configuration.html
+
+[tools]
+# Node.js (旧 nodenv)
+node = "lts"
+
+# Go (旧 goenv)
+go = "latest"
+
+# Python (旧 pyenv, rye) - パッケージ管理は uv を使用
+python = "latest"
+
+# Ruby (旧 rbenv)
+ruby = "latest"
+
+# Java (旧 jenv)
+java = "temurin-21"
+
+# Perl (旧 plenv) - コメントアウト：必要に応じて有効化
+# perl = "latest"
+
+[settings]
+# 実験的機能を有効化
+experimental = true
+
+# シムの代わりにPATHを使用（高速）
+legacy_version_file = true
