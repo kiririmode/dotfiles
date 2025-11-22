@@ -16,3 +16,5 @@ bin/
 Brewfile.lock.json
 update-notifier-npm.json
 .env
+.claude/
+.serena/
