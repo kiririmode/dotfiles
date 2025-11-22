@@ -32,7 +32,7 @@
       ]
     }
   },
-  "postCreateCommand": "echo 'eval \"$(direnv hook bash)\"' >> ~/.bashrc",
+  "postCreateCommand": "echo 'eval \"$(direnv hook bash)\"' >> ~/.bashrc && pre-commit install",
   "postStartCommand": "${containerWorkspaceFolder}/etc/scripts/claude-code.sh",
   "remoteUser": "vscode"
 }

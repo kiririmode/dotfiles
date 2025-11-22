@@ -8,9 +8,10 @@ RUN apt-get update && apt-get install -y \
     && apt-get clean \
     && rm -rf /tmp/* /var/tmp/*
 
-# Switch to vscode user and install uv and Claude Code
+# Switch to vscode user and install uv, pre-commit
 USER vscode
-RUN curl -LsSf https://astral.sh/uv/install.sh | sh
+RUN curl -LsSf https://astral.sh/uv/install.sh | sh \
+    && $HOME/.local/bin/uv tool install pre-commit
 # RUN npm install -g @anthropic-ai/claude-code
 
 # Set working directory
