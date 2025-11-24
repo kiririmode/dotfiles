@@ -16,7 +16,7 @@ deploy: deploy-config
 
 # Create symbolic links for .config subdirectories individually
 # This avoids overwriting existing ~/.config directory
-CONFIG_ITEMS := ghostty git karabiner mise peco starship.toml
+CONFIG_ITEMS := ghostty git karabiner mise peco starship.toml blogsync
 deploy-config:
 	@echo '===> Deploying .config items...'
 	@mkdir -p $(HOME)/.config
