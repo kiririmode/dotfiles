@@ -50,3 +50,4 @@ keybind = cmd+r=reload_config
 # パフォーマンス設定
 # ------------------------------------------------------------------------------
 mouse-scroll-multiplier = 0.5
+keybind = shift+enter=text:\x1b\r

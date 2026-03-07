@@ -114,3 +114,16 @@ fi
 if [[ -e "$HOME/.iterm2_shell_integration.zsh" ]]; then
     source "$HOME/.iterm2_shell_integration.zsh"
 fi
+
+# bun completions
+[ -s "/Users/kiririmode/.bun/_bun" ] && source "/Users/kiririmode/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+alias claude-mem='/Users/kiririmode/.bun/bin/bun "/Users/kiririmode/.claude/plugins/marketplaces/thedotmack/plugin/scripts/worker-service.cjs"'
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
