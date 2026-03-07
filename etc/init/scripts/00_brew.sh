@@ -23,7 +23,7 @@ if ! has "ruby"; then
     exit
 fi
 
-ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+# ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 if has "brew"; then
     brew doctor
 else

@@ -18,11 +18,6 @@ if ! has "brew"; then
     exit
 fi
 
-if ! brew tap Homebrew/bundle; then
-    log_fail "error: failed to tap Homebrew/bundle"
-    exit 1
-fi
-
 cd "$DOTPATH"/etc/init/assets/
 if [ ! -f Brewfile ]; then
     brew bundle dump
