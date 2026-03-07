@@ -14,3 +14,4 @@ repos:
     hooks:
       - id: shellcheck
         args: ["-e", "SC1090,SC1091"]  # Ignore source file not found warnings
+        exclude: '^\.zshrc$|\.zsh\.d/.*\.zshrc$'  # Exclude zsh config files
