@@ -9,12 +9,15 @@ theme = Catppuccin Mocha
 macos-titlebar-style = tabs
 window-padding-x = 8
 window-padding-y = 8
+background-opacity = 0.9
+background-blur-radius = 20
 
 # ------------------------------------------------------------------------------
 # フォント設定
 # ------------------------------------------------------------------------------
 font-family = "JetBrains Mono"
 font-size = 12
+font-thicken = true
 
 # ------------------------------------------------------------------------------
 # Quick Terminal（グローバルホットキーで呼び出し）

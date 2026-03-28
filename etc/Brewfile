@@ -36,6 +36,7 @@ brew 'peco'                         # インタラクティブフィルタリン
 # Git・バージョン管理
 # ------------------------------------------------------------------------------
 brew 'gh'                           # GitHub公式CLI
+brew 'copilot'                      # GitHub Copilot CLI拡張（ghコマンド経由でCopilot利用）
 brew 'hub'                          # GitHubワークフロー拡張CLI
 brew 'ghq'                          # リモートリポジトリのローカル管理
 brew 'difftastic'                   # 構文認識型の差分表示ツール
@@ -79,11 +80,11 @@ cask 'font-fira-code-nerd-font'     # Fira Code Nerd Font - リガチャ対応�
 # ------------------------------------------------------------------------------
 # 開発ツール
 # ------------------------------------------------------------------------------
-cask 'docker'                       # Dockerコンテナ実行環境
-cask 'homebrew/cask/emacs'          # Emacsテキストエディタ
+cask 'docker-desktop'               # Dockerコンテナ実行環境
+cask 'homebrew/cask/emacs-app'      # Emacsテキストエディタ
 cask 'ghostty'                      # GPU高速化ターミナルエミュレータ
 cask 'visual-studio-code'           # VS Code - 汎用コードエディタ
-cask 'wireshark'                    # ネットワークプロトコルアナライザ
+cask 'wireshark-app'                # ネットワークプロトコルアナライザ
 
 # ------------------------------------------------------------------------------
 # 生産性向上
@@ -122,4 +123,3 @@ cask '1password'                    # パスワードマネージャー
 mas 'LINE', id: 539883307           # LINEメッセンジャー
 mas 'Evernote', id: 406056744       # ノート・情報整理アプリ
 mas 'Amphetamine', id: 937984704    # スリープ防止ユーティリティ
-mas 'XCode', id: 497799835          # Apple統合開発環境
