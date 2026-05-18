@@ -14,6 +14,9 @@
 # config.yaml は envsubst で生成される秘匿情報を含むファイルのため除外し、テンプレートのみ追跡する
 .config/blogsync/*
 !.config/blogsync/config.yaml.tmpl
+
+# ghostty が設定変更時に自動生成するバックアップファイル
+.config/ghostty/config.*.bak
 bin/
 Brewfile.lock.json
 update-notifier-npm.json
