@@ -36,7 +36,6 @@ brew 'peco'                         # インタラクティブフィルタリン
 # Git・バージョン管理
 # ------------------------------------------------------------------------------
 brew 'gh'                           # GitHub公式CLI
-brew 'copilot'                      # GitHub Copilot CLI拡張（ghコマンド経由でCopilot利用）
 brew 'hub'                          # GitHubワークフロー拡張CLI
 brew 'ghq'                          # リモートリポジトリのローカル管理
 brew 'difftastic'                   # 構文認識型の差分表示ツール
@@ -85,6 +84,8 @@ cask 'homebrew/cask/emacs-app'      # Emacsテキストエディタ
 cask 'ghostty'                      # GPU高速化ターミナルエミュレータ
 cask 'visual-studio-code'           # VS Code - 汎用コードエディタ
 cask 'wireshark-app'                # ネットワークプロトコルアナライザ
+cask 'copilot-cli'                  # GitHub Copilot CLI拡張（ghコマンド経由でCopilot利用）
+
 
 # ------------------------------------------------------------------------------
 # 生産性向上

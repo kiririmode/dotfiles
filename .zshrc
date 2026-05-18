@@ -118,12 +118,20 @@ fi
 # bun completions
 [ -s "/Users/kiririmode/.bun/_bun" ] && source "/Users/kiririmode/.bun/_bun"
 
-# bun
+# ==============================================================================
+# PATH 設定
+# ==============================================================================
+
+# path 配列の重複エントリを自動除去（$PATH と path 配列は連動している）
+typeset -U path
+
 export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
+
+# 優先度の高い順に先頭へ追加
+path=(
+    "$HOME/.local/bin"
+    "$BUN_INSTALL/bin"
+    $path
+)
 
 alias claude-mem='/Users/kiririmode/.bun/bin/bun "/Users/kiririmode/.claude/plugins/marketplaces/thedotmack/plugin/scripts/worker-service.cjs"'
-
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"

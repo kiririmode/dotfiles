@@ -1,16 +1,21 @@
 # ==============================================================================
 # Ghostty Configuration
 # ==============================================================================
+language = ja
 
 # ------------------------------------------------------------------------------
 # テーマ・外観
 # ------------------------------------------------------------------------------
-theme = Catppuccin Mocha
+theme = Solarized Darcula
 macos-titlebar-style = tabs
 window-padding-x = 8
 window-padding-y = 8
 background-opacity = 0.9
 background-blur-radius = 20
+
+# 起動時のウィンドウサイズ
+window-height = 80
+window-width = 160
 
 # ------------------------------------------------------------------------------
 # フォント設定
@@ -25,6 +30,7 @@ font-thicken = true
 keybind = global:ctrl+semicolon=toggle_quick_terminal
 quick-terminal-animation-duration = 0.12
 quick-terminal-position = top
+quick-terminal-size = 80%
 
 # ------------------------------------------------------------------------------
 # キーバインド - タブ操作
