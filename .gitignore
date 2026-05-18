@@ -11,7 +11,9 @@
 .config/karabiner/automatic_backups
 .config/wireshark/
 .config/direnv/
-.config/blogsync/
+# config.yaml は envsubst で生成される秘匿情報を含むファイルのため除外し、テンプレートのみ追跡する
+.config/blogsync/*
+!.config/blogsync/config.yaml.tmpl
 bin/
 Brewfile.lock.json
 update-notifier-npm.json

@@ -29,6 +29,11 @@ deploy-claude:
 	@mkdir -p $(HOME)/.claude
 	@$(foreach val, $(CLAUDE_SETTINGS_ITEMS), ln -sfnv $(DOTPATH)/.claude/$(val) $(HOME)/.claude/$(val);)
 
+blogsync-config:
+	@echo '===> Generating .config/blogsync/config.yaml from template...'
+	@test -n "$$BLOGSYNC_PASSWORD" || { echo 'ERROR: BLOGSYNC_PASSWORD is not set'; exit 1; }
+	@envsubst < $(HOME)/.config/blogsync/config.yaml.tmpl > $(HOME)/.config/blogsync/config.yaml
+
 update:
 	git pull origin master
 	git submodule init
@@ -70,4 +75,4 @@ clean:
 	@-$(foreach val, $(DOTFILES), rm -vrf $(HOME)/$(val);)
 	-rm -rf $(DOTPATH)
 
-.PHONY: all list deploy deploy-config deploy-claude update init brew brew-bundle fonts zplug tmux defaults mise-setup go-tools install clean
+.PHONY: all list deploy deploy-config deploy-claude blogsync-config update init brew brew-bundle fonts zplug tmux defaults mise-setup go-tools install clean
