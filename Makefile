@@ -9,7 +9,7 @@ list:
 	@$(foreach val, $(DOTFILES), /bin/ls -dF $(val);)
 
 # Create a symbolic links of dotfiles to your home directory.
-deploy: deploy-config
+deploy: deploy-config deploy-claude
 	@echo '===> Start to deploy dotfiles to home directory.'
 	@echo ''
 	@$(foreach val, $(DOTFILES), ln -sfnv $(abspath $(val)) $(HOME)/$(val);)
@@ -21,6 +21,13 @@ deploy-config:
 	@echo '===> Deploying .config items...'
 	@mkdir -p $(HOME)/.config
 	@$(foreach val, $(CONFIG_ITEMS), ln -sfnv $(DOTPATH)/.config/$(val) $(HOME)/.config/$(val);)
+
+# Create symbolic link for ~/.claude/settings.json
+CLAUDE_SETTINGS_ITEMS := settings.json
+deploy-claude:
+	@echo '===> Deploying .claude items...'
+	@mkdir -p $(HOME)/.claude
+	@$(foreach val, $(CLAUDE_SETTINGS_ITEMS), ln -sfnv $(DOTPATH)/.claude/$(val) $(HOME)/.claude/$(val);)
 
 update:
 	git pull origin master
@@ -63,4 +70,4 @@ clean:
 	@-$(foreach val, $(DOTFILES), rm -vrf $(HOME)/$(val);)
 	-rm -rf $(DOTPATH)
 
-.PHONY: all list deploy deploy-config update init brew brew-bundle fonts zplug tmux defaults mise-setup go-tools install clean
+.PHONY: all list deploy deploy-config deploy-claude update init brew brew-bundle fonts zplug tmux defaults mise-setup go-tools install clean

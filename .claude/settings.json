@@ -1,0 +1,33 @@
+{
+  "statusLine": {
+    "type": "command",
+    "command": "npx -y ccstatusline@latest",
+    "padding": 0
+  },
+  "enabledPlugins": {
+    "marp-slide@agent-toolkit": true,
+    "example-skills@anthropic-agent-skills": true,
+    "andrej-karpathy-skills@karpathy-skills": true
+  },
+  "extraKnownMarketplaces": {
+    "anthropic-agent-skills": {
+      "source": {
+        "source": "github",
+        "repo": "anthropics/skills"
+      }
+    },
+    "karpathy-skills": {
+      "source": {
+        "source": "github",
+        "repo": "forrestchang/andrej-karpathy-skills"
+      }
+    }
+  },
+  "language": "Japanese",
+  "effortLevel": "medium",
+  "plansDirectory": "./plans",
+  "autoMemoryEnabled": true,
+  "env": {
+    "CLAUDE_CODE_ATTRIBUTION_HEADER": "0"
+  }
+}
