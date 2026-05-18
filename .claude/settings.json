@@ -28,6 +28,7 @@
   "plansDirectory": "./plans",
   "autoMemoryEnabled": true,
   "env": {
-    "CLAUDE_CODE_ATTRIBUTION_HEADER": "0"
+    "CLAUDE_CODE_ATTRIBUTION_HEADER": "0",
+    "CLAUDE_CODE_DISABLE_TERMINAL_TITLE": "1"
   }
 }
