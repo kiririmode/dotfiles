@@ -21,6 +21,9 @@ fscache = true
 # Linux 環境との互換性問題を早期発見できる
 ignorecase = false
 
+# 非ASCII文字を含むファイル名をエスケープせずそのまま表示
+quotepath = false
+
 [init]
 # git init 時のデフォルトブランチ名
 # 「master」から「main」への移行が業界標準
