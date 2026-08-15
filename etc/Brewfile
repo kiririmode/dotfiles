@@ -65,6 +65,8 @@ brew 'ssh-copy-id'                  # SSH公開鍵をリモートサーバーに
 # ------------------------------------------------------------------------------
 brew 'ansifilter'                   # ANSIエスケープシーケンスの除去・変換
 brew 'mas'                          # Mac App Store CLI
+tap 'jmatsuzaki-inc/tap'
+brew 'jmatsuzaki-inc/tap/tcc2'      # TaskChute Cloud 2 CLI
 
 # ==============================================================================
 # フォント
