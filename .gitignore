@@ -24,3 +24,6 @@ update-notifier-npm.json
 .claude/*
 !.claude/settings.json
 .serena/
+
+# APM dependencies
+apm_modules/
