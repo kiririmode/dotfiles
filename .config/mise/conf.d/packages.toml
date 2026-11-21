@@ -40,6 +40,7 @@
 "brew:ssh-copy-id" = { os = "macos" }                # SSH公開鍵をリモートサーバーに登録
 "brew:ansifilter" = { os = "macos" }                 # ANSIエスケープシーケンスの除去・変換
 "brew:mas" = { os = "macos" }                        # Mac App Store CLI（下の mas: エントリが使う）
+"brew:apm" = { os = "macos" }                        # Agent Package Manager（~/.apm/apm.yml のスキルを配置する）
 # サードパーティ tap（github.com/jmatsuzaki-inc/homebrew-tap）は owner/tap/formula で指定する
 "brew:jmatsuzaki-inc/tap/tcc2" = { os = "macos" }    # TaskChute Cloud 2 CLI
 
@@ -100,5 +101,6 @@
 "aqua:Wilfred/difftastic" = { version = "latest", os = ["linux"] }
 "aqua:cli/cli" = { version = "latest", os = ["linux"] }
 "aqua:astral-sh/uv" = { version = "latest", os = ["linux"] }
+"aqua:microsoft/apm" = { version = "latest", os = ["linux"] } # bootstrap タスクの `apm install -g` が使う
 # blogsync は両 OS で mise が入れる（旧 go-tools.sh は darwin 用バイナリ固定だった）
 "github:x-motemen/blogsync" = "0.20.1"
