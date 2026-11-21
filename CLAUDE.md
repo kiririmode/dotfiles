@@ -50,6 +50,8 @@ BLOGSYNC_PASSWORD=... mise run blogsync-config
 
 `.config/mise/config.toml` 自体は言語ランタイムの `[tools]` と `[settings]` だけを持つ。
 
+APM（Agent Package Manager）でスキルを足す・外すときは、ユーザースコープの manifest である `.apm/apm.yml` を編集する。symlink と配置の仕組みは `dotfiles.toml` の APM の節のコメントにある。
+
 ### 設定ファイル
 
 - `.config/karabiner/` - Karabiner-Elements設定（macOSキーリマップ）
