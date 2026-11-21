@@ -1,0 +1,19 @@
+name: kiririmode
+version: 1.0.0
+description: APM project for kiririmode
+author: kiririmode
+# Which agent platforms to deploy to (uncomment to pin):
+# targets:
+#   - copilot
+#   - claude
+
+dependencies:
+  apm:
+    - mattpocock/skills#v1.3.2
+    - coji/natural-japanese#v1.5.0
+    - nanaism/yomiyasu
+    - herdrdev/herdr#v0.9.5
+    - yusukebe/ax#v0.1.25
+  mcp: []
+includes: auto
+scripts: {}

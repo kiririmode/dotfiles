@@ -34,3 +34,10 @@ dotfiles.root = "{{ mise_config_dir | canonicalize | dirname | dirname }}"
 
 # --- Claude Code ---
 "~/.claude/settings.json" = {}
+
+# --- APM（Agent Package Manager）のユーザースコープ ---
+# manifest（apm.yml）だけを symlink する。apm は apm.yml をインプレースで書き換えるので symlink が保たれる。
+# apm.lock.yaml は rename で書き換えられ symlink が外れるため、各マシンのローカルに置く。
+# ~/.apm の config.json（認証情報を含みうる）、cache/、apm_modules/ も管理しない。
+# スキルの配置は bootstrap タスクの `apm install -g` が行う。
+"~/.apm/apm.yml" = {}

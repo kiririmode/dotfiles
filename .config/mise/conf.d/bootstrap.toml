@@ -38,6 +38,13 @@ run = [
     curl -fsSL https://claude.ai/install.sh | bash
   fi
   ''',
+  # APM のユーザースコープのスキル（~/.apm/apm.yml は dotfiles.toml が symlink する）。
+  # apm は macOS では brew:apm、Linux では aqua:microsoft/apm（packages.toml）が入れる。
+  '''
+  if command -v apm >/dev/null 2>&1 && [ -f "$HOME/.apm/apm.yml" ]; then
+    (cd "$HOME" && apm install -g)
+  fi
+  ''',
 ]
 
 # 旧 Makefile の blogsync-config
