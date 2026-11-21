@@ -46,6 +46,26 @@ if [[ -f "$VITAL_PATH" ]]; then
 fi
 
 # ==============================================================================
+# mise 本体を PATH に入れる
+# ==============================================================================
+# .zsh.d/mise.zsh は、`has mise` が真のときだけ `mise activate zsh` を実行する。
+# ところが、この時点の PATH には mise 本体の置き場所が無いことがある。
+#   - Linux: README の手順（mise.run）で入れた mise は ~/.local/bin にある。
+#     ~/.local/bin を PATH に足すのは、このファイル末尾の PATH 設定である。
+#   - macOS: Homebrew の mise は /opt/homebrew/bin（Intel では /usr/local/bin）にある。
+#     /opt/homebrew/bin を足すのは /etc/zprofile の path_helper だけである。
+#     このため、ログインしない対話シェル（zsh -ic）では PATH に無い。
+# そこで .zsh.d を読む前に、これらのディレクトリを PATH の末尾に足す。
+# 末尾に足すのは、既にある要素の順序を変えないためである。
+# .zshenv の typeset -U により、既にある要素は元の位置に残る。
+# 最終的な優先順位は、このファイル末尾の PATH 設定が決める。
+path+=(
+    "$HOME/.local/bin"(N-/)     # mise.run の導入先
+    /opt/homebrew/bin(N-/)      # Homebrew（Apple Silicon）
+    /usr/local/bin(N-/)         # Homebrew（Intel）
+)
+
+# ==============================================================================
 # 機能別設定ファイルの読み込み
 # ==============================================================================
 
