@@ -16,3 +16,13 @@ repos:
       - id: shellcheck
         args: ["-e", "SC1090,SC1091"]  # Ignore source file not found warnings
         exclude: '^\.zshrc$|^\.zsh\.d/'  # Exclude zsh config files
+
+  # ax のスキル（apm.yml）と CLI（packages.toml）の版が揃っているかを確かめる
+  - repo: local
+    hooks:
+      - id: ax-version-sync
+        name: ax の版が apm.yml と packages.toml で一致する
+        entry: etc/pre-commit/check-ax-version.sh
+        language: script
+        files: ^(\.apm/apm\.yml|\.config/mise/conf\.d/packages\.toml)$
+        pass_filenames: false
