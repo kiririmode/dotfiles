@@ -13,6 +13,7 @@ dependencies:
     - coji/natural-japanese#v1.5.0
     - nanaism/yomiyasu
     - herdrdev/herdr#v0.9.5
+    - yusukebe/ax#v0.1.25
   mcp: []
 includes: auto
 scripts: {}

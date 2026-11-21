@@ -104,3 +104,6 @@
 "aqua:microsoft/apm" = { version = "latest", os = ["linux"] } # bootstrap タスクの `apm install -g` が使う
 # blogsync は両 OS で mise が入れる（旧 go-tools.sh は darwin 用バイナリ固定だった）
 "github:x-motemen/blogsync" = "0.20.1"
+# ax（エージェント向けの curl）。スキルは ~/.apm/apm.yml の yusukebe/ax が配置する。
+# スキルの記述とフラグを一致させるため、apm.yml のタグと同じ版に揃える。
+"github:yusukebe/ax" = "0.1.25"
