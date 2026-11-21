@@ -8,27 +8,22 @@ macOS/Linux向けの個人用dotfiles管理リポジトリ。zsh設定、開発�
 
 ## よく使うコマンド
 
+セットアップは `mise bootstrap` で行う（Makefile と `etc/scripts/` は廃止済み）。初回の手順は README.md を参照。
+
 ```bash
-# 初回インストール（dotfilesのクローン後）
-make
+# 変更内容の確認（何も変更しない）
+mise bootstrap --dry-run
 
-# dotfilesの更新（git pull + submodule更新）
-make update
+# リポジトリを fast-forward してから全体を適用
+mise bootstrap --update
 
-# dotfilesをホームディレクトリにシンボリックリンク
-make deploy
+# dotfiles の symlink だけを適用 / 状態確認 / 削除
+mise dot apply
+mise dot status
+mise dot unapply
 
-# 開発環境の初期化スクリプト実行
-make init
-
-# 言語ランタイムのセットアップ（mise使用）
-make mise-setup
-
-# Goツールのインストール
-make go-tools
-
-# dotfilesの削除
-make clean
+# blogsync の設定ファイルをテンプレートから生成
+BLOGSYNC_PASSWORD=... mise run blogsync-config
 ```
 
 ## アーキテクチャ
@@ -36,8 +31,8 @@ make clean
 ### コア構造
 
 - `.path` - `$DOTPATH`環境変数を設定するスクリプト。シンボリックリンクを解決してdotfilesの実際のパスを取得
-- `etc/lib.sh` - 共通ユーティリティ関数（OS検出、ロギング、dotfilesインストール処理）
-- `Makefile` - dotfilesのデプロイ・初期化を管理するメインエントリーポイント
+- `etc/lib.sh` - 共通ユーティリティ関数（OS検出、ロギング）。`.zshenv` が読み込む
+- `.config/mise/conf.d/` - `mise bootstrap` の定義。`~/.config/mise` はこのリポジトリの `.config/mise` への symlink なので、グローバル設定として読まれる
 
 ### zsh設定の読み込み順序
 
@@ -46,19 +41,14 @@ make clean
 3. `.zsh.d/*.zsh` - 機能別設定ファイル（alias、言語環境等）
 4. `.zsh.d/$(get_os).zshrc` - OS固有設定（osx.zshrc等）
 
-### 初期化スクリプト
+### セットアップ（mise bootstrap）
 
-`etc/scripts/` 配下：
-- `brew.sh` - Homebrewインストール（macOS）
-- `brew-bundle.sh` - Brewfileによるパッケージインストール（macOS）
-- `mise.sh` - miseによる各言語ランタイム環境構築
-- `go-tools.sh` - Goツールのインストール
-- `tmux.sh` - Tmux Plugin Managerのインストール
-- `fonts.sh` - フォントインストール（macOS）
-- `zplug.sh` - zplugインストール
-- `defaults.sh` - macOSシステム設定
+`.config/mise/conf.d/` 配下：
+- `dotfiles.toml` - `$HOME` からリポジトリへの symlink（`[dotfiles]`）。`dotfiles.root` は `~/.config/mise` の実パスから求めたリポジトリのルート
+- `packages.toml` - OS パッケージ。macOS は Homebrew・cask・Mac App Store、Linux（WSL2 の Ubuntu）は apt と aqua backend の `[tools]`。各エントリは `os` で対象 OS を絞る
+- `bootstrap.toml` - Git リポジトリ（zplug、tpm）、macOS の defaults、`bootstrap` タスク（Claude Code の導入など）、`blogsync-config` タスク
 
-Brewfile: `etc/Brewfile`
+`.config/mise/config.toml` 自体は言語ランタイムの `[tools]` と `[settings]` だけを持つ。
 
 ### 設定ファイル
 
@@ -84,4 +74,4 @@ Pythonパッケージ管理には uv を使用。
 - macOS: `.zsh.d/mac.zshenv`, `.zsh.d/osx.zshrc`
 - Linux: `.zsh.d/linux.zshrc`（存在する場合）
 
-各スクリプトは`is_osx`/`is_linux`関数で条件分岐し、対象OSでのみ実行される。
+`mise bootstrap` 側の OS 分岐は、`get_os` ではなく各エントリの `os`（`macos` / `linux`）で表す。WSL は `linux` として扱う。

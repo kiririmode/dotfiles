@@ -1,0 +1,36 @@
+# dotfiles のホームへの配置（旧 Makefile の deploy / deploy-config / deploy-claude）
+# https://mise.jdx.dev/dotfiles.html
+#
+# 前提: ~/.config/mise はこのリポジトリの .config/mise への symlink である
+# （`mise bootstrap --from ... --config-dir .config/mise` が作る）。
+
+[settings]
+# source を省いたエントリは dotfiles.root 配下の同じ相対パスから探される。
+# ~/.config/mise の symlink を実パスに解決し、2階層上（リポジトリのルート）を root とする。
+# canonicalize しないと、symlink が "~/.config/mise/../../.zshrc" のような経路を指してしまう。
+dotfiles.root = "{{ mise_config_dir | canonicalize | dirname | dirname }}"
+
+[dotfiles]
+# --- シェル ---
+"~/.zshenv" = {}
+"~/.zshrc" = {}
+"~/.zshrc.zplug" = {}
+"~/.zsh.d" = {}
+# .zshenv が source し、自身の symlink を辿って $DOTPATH を決める
+"~/.path" = {}
+
+# --- ツール ---
+"~/.tmux.conf" = {}
+"~/.gitconfig" = {}
+"~/.emacs.d" = {}
+
+# --- ~/.config 配下（ディレクトリ単位で個別に symlink する） ---
+"~/.config/git" = {}
+"~/.config/peco" = {}
+"~/.config/starship.toml" = {}
+"~/.config/blogsync" = {}
+"~/.config/ghostty" = { variants = [{ os = "macos" }] }
+"~/.config/karabiner" = { variants = [{ os = "macos" }] }
+
+# --- Claude Code ---
+"~/.claude/settings.json" = {}

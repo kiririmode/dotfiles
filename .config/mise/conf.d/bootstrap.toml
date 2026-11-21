@@ -1,0 +1,49 @@
+# mise bootstrap の残りの部分（旧 zplug.sh / tmux.sh / defaults.sh / claude-code.sh）
+# https://mise.jdx.dev/bootstrap.html
+
+# ------------------------------------------------------------
+# Git リポジトリ（旧 zplug.sh / tmux.sh）
+# 既存のチェックアウトは origin が一致し、未コミットの変更が無ければそのまま受け入れられる。
+# ------------------------------------------------------------
+[bootstrap.repos]
+"~/.zplug" = { url = "https://github.com/zplug/zplug.git" }
+"~/.tmux/plugins/tpm" = { url = "https://github.com/tmux-plugins/tpm" }
+
+# ------------------------------------------------------------
+# macOS の設定（旧 defaults.sh）
+# mise は Finder と SystemUIServer を再起動しない。反映には
+# `killall Finder SystemUIServer` を手で実行する（bootstrap が注意を出す）。
+# ------------------------------------------------------------
+[bootstrap.settings.macos.finder]
+show_all_files = true
+
+[bootstrap.directories."~/Pictures/screenshot"]
+os = "macos"
+
+# ------------------------------------------------------------
+# bootstrap タスク: 宣言的に書けない処理。毎回実行されるので冪等に保つ。
+# ------------------------------------------------------------
+[tasks.bootstrap]
+description = "dotfiles: 宣言的に書けない初期化処理"
+run = [
+  # スクリーンショットの保存先（defaults の値はテンプレート展開されないため $HOME を使えるタスクで書く）
+  '''
+  if [ "$(uname)" = Darwin ]; then
+    defaults write com.apple.screencapture location "$HOME/Pictures/screenshot"
+  fi
+  ''',
+  # Claude Code（旧 claude-code.sh）
+  '''
+  if ! command -v claude >/dev/null 2>&1; then
+    curl -fsSL https://claude.ai/install.sh | bash
+  fi
+  ''',
+]
+
+# 旧 Makefile の blogsync-config
+[tasks.blogsync-config]
+description = "dotfiles: ~/.config/blogsync/config.yaml をテンプレートから生成する"
+run = '''
+test -n "${BLOGSYNC_PASSWORD:-}" || { echo 'ERROR: BLOGSYNC_PASSWORD is not set' >&2; exit 1; }
+envsubst < "$HOME/.config/blogsync/config.yaml.tmpl" > "$HOME/.config/blogsync/config.yaml"
+'''

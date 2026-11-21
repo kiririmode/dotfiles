@@ -1,0 +1,104 @@
+# OS パッケージ（旧 etc/Brewfile と brew.sh / brew-bundle.sh）
+# https://mise.jdx.dev/bootstrap/packages/
+#
+# macOS: Homebrew の formula / cask と Mac App Store アプリ
+# Linux（WSL2 の Ubuntu を想定）: apt と、apt に無い CLI は mise の [tools]（aqua backend）
+
+[bootstrap.packages]
+# ============================================================
+# macOS: brew formula
+# ============================================================
+"brew:zsh" = { os = "macos" }                        # Z Shell - メインシェル
+"brew:zplug" = { os = "macos" }                      # zshプラグインマネージャー
+"brew:starship" = { os = "macos" }                   # クロスシェル対応のカスタマイズ可能なプロンプト
+"brew:tmux" = { os = "macos" }                       # ターミナルマルチプレクサ
+"brew:reattach-to-user-namespace" = { os = "macos" } # tmuxでmacOSのクリップボード連携を有効化
+"brew:source-highlight" = { os = "macos" }           # lessコマンドでのソースコードシンタックスハイライト
+"brew:z" = { os = "macos" }                          # ディレクトリ間の高速移動（頻度・最近度ベース）
+"brew:direnv" = { os = "macos" }                     # ディレクトリごとの環境変数自動読み込み
+"brew:coreutils" = { os = "macos" }                  # GNU基本ユーティリティ（gls, gcat等）
+"brew:findutils" = { os = "macos" }                  # GNU検索ユーティリティ（gfind, gxargs等）
+"brew:readline" = { os = "macos" }                   # コマンドライン編集ライブラリ
+"brew:gettext" = { os = "macos" }                    # 国際化・地域化ライブラリ（envsubst を含む）
+"brew:curl" = { os = "macos" }                       # URLデータ転送ツール
+"brew:tree" = { os = "macos" }                       # ディレクトリ構造をツリー表示
+"brew:watch" = { os = "macos" }                      # コマンドを定期実行して結果を監視
+"brew:jq" = { os = "macos" }                         # JSONプロセッサ（パース・フィルタリング）
+"brew:ack" = { os = "macos" }                        # 高速なソースコード検索ツール
+"brew:peco" = { os = "macos" }                       # インタラクティブフィルタリングツール
+"brew:gh" = { os = "macos" }                         # GitHub公式CLI
+"brew:hub" = { os = "macos" }                        # GitHubワークフロー拡張CLI
+"brew:ghq" = { os = "macos" }                        # リモートリポジトリのローカル管理
+"brew:difftastic" = { os = "macos" }                 # 構文認識型の差分表示ツール
+"brew:mise" = { os = "macos" }                       # ポリグロットランタイムマネージャー（言語バージョン管理）
+"brew:uv" = { os = "macos" }                         # 高速Pythonパッケージマネージャー
+"brew:clang-format" = { os = "macos" }               # C/C++/Objective-Cコードフォーマッタ
+"brew:maven" = { os = "macos" }                      # Javaプロジェクトビルドツール
+"brew:hadolint" = { os = "macos" }                   # Dockerfile静的解析ツール
+"brew:awscli" = { os = "macos" }                     # AWS公式コマンドラインインターフェース
+"brew:gnupg" = { os = "macos" }                      # GNU Privacy Guard（暗号化・署名。Brewfile の gpg は gnupg の別名）
+"brew:ssh-copy-id" = { os = "macos" }                # SSH公開鍵をリモートサーバーに登録
+"brew:ansifilter" = { os = "macos" }                 # ANSIエスケープシーケンスの除去・変換
+"brew:mas" = { os = "macos" }                        # Mac App Store CLI（下の mas: エントリが使う）
+# サードパーティ tap（github.com/jmatsuzaki-inc/homebrew-tap）は owner/tap/formula で指定する
+"brew:jmatsuzaki-inc/tap/tcc2" = { os = "macos" }    # TaskChute Cloud 2 CLI
+
+# ============================================================
+# macOS: brew cask
+# ============================================================
+"brew-cask:font-myrica" = { os = "macos" }              # Myrica - プログラミング用日本語フォント
+"brew-cask:font-fira-code-nerd-font" = { os = "macos" } # Fira Code Nerd Font - リガチャ対応プログラミングフォント
+"brew-cask:docker-desktop" = { os = "macos" }           # Dockerコンテナ実行環境
+"brew-cask:emacs-app" = { os = "macos" }                # Emacsテキストエディタ
+"brew-cask:ghostty" = { os = "macos" }                  # GPU高速化ターミナルエミュレータ
+"brew-cask:visual-studio-code" = { os = "macos" }       # VS Code - 汎用コードエディタ
+"brew-cask:wireshark-app" = { os = "macos" }            # ネットワークプロトコルアナライザ
+"brew-cask:copilot-cli" = { os = "macos" }              # GitHub Copilot CLI
+"brew-cask:alfred" = { os = "macos" }                   # ランチャー・ワークフロー自動化ツール
+"brew-cask:karabiner-elements" = { os = "macos" }       # キーボードカスタマイズツール
+"brew-cask:the-unarchiver" = { os = "macos" }           # 各種アーカイブ形式の解凍ツール
+"brew-cask:claude" = { os = "macos" }                   # Claude AIアシスタント
+"brew-cask:slack" = { os = "macos" }                    # チームコミュニケーションツール
+"brew-cask:dropbox" = { os = "macos" }                  # クラウドストレージ・ファイル同期
+"brew-cask:google-chrome" = { os = "macos" }            # Google Chromeウェブブラウザ
+"brew-cask:drawio" = { os = "macos" }                   # 図表・ダイアグラム作成ツール
+"brew-cask:xmind" = { os = "macos" }                    # マインドマップ作成ツール
+"brew-cask:obsidian" = { os = "macos" }                 # ノート・知識管理ツール（Markdown対応）
+"brew-cask:1password" = { os = "macos" }                # パスワードマネージャー
+
+# ============================================================
+# macOS: Mac App Store（キーは App Store の数値 ID。Apple アカウントへのサインインが必要）
+# mas コマンドは上の brew:mas が入れる。初回は mas が無く失敗しうるので、その場合は再実行する。
+# ============================================================
+"mas:539883307" = { os = "macos" } # LINE
+"mas:406056744" = { os = "macos" } # Evernote
+"mas:937984704" = { os = "macos" } # Amphetamine
+
+# ============================================================
+# Linux（WSL2 の Ubuntu）: apt
+# ============================================================
+"apt:zsh" = { os = "linux" }
+"apt:git" = { os = "linux" }
+"apt:curl" = { os = "linux" }
+"apt:unzip" = { os = "linux" }
+"apt:build-essential" = { os = "linux" }
+"apt:tmux" = { os = "linux" }
+"apt:direnv" = { os = "linux" }
+"apt:jq" = { os = "linux" }
+"apt:tree" = { os = "linux" }
+"apt:ack" = { os = "linux" }
+"apt:gnupg" = { os = "linux" }
+"apt:gettext-base" = { os = "linux" }      # envsubst（blogsync-config タスクが使う）
+"apt:source-highlight" = { os = "linux" }
+
+# Linux で apt に無い（または古い）CLI は aqua backend で入れる。
+# macOS では上の brew が入れるので、os で Linux に限る。
+[tools]
+"aqua:starship/starship" = { version = "latest", os = ["linux"] }
+"aqua:peco/peco" = { version = "latest", os = ["linux"] }
+"aqua:x-motemen/ghq" = { version = "latest", os = ["linux"] }
+"aqua:Wilfred/difftastic" = { version = "latest", os = ["linux"] }
+"aqua:cli/cli" = { version = "latest", os = ["linux"] }
+"aqua:astral-sh/uv" = { version = "latest", os = ["linux"] }
+# blogsync は両 OS で mise が入れる（旧 go-tools.sh は darwin 用バイナリ固定だった）
+"github:x-motemen/blogsync" = "0.20.1"
