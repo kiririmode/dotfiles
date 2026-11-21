@@ -157,8 +157,17 @@ export GOPATH="$HOME"
 # ==============================================================================
 # (N-/): グロブ修飾子 - ディレクトリが存在しない場合は空文字に展開（エラー回避）
 
+# mise の shims ディレクトリ（mise で入れたツールを起動する入口）
+#   .zsh.d/mise.zsh の `mise activate zsh` は、PATH をプロンプト表示時のフックで更新する。
+#   このため、対話しないシェルや、シェルの起動後に入れたツールには効かない。
+#   shims を常に PATH に置いて、その場合でもツールが見つかるようにする。
+#   対話シェルでは、mise activate が各ツールの bin を shims より前に足すので、そちらが優先される。
+#   mise を呼ばずにパスを直接書く。対話しないシェルでは mise 自体が PATH に無いことがあるからである。
+#   パスは mise の shims_dir の既定値（$MISE_DATA_DIR/shims）に従う。
+#   参考: https://mise.jdx.dev/dev-tools/shims.html#how-to-add-mise-shims-to-path
 path=(
     "$GOPATH/bin"(N-/)          # Go binaries
+    "${MISE_SHIMS_DIR:-${MISE_DATA_DIR:-${XDG_DATA_HOME:-$HOME/.local/share}/mise}/shims}"(N-/)  # mise shims
     $path
 )
 

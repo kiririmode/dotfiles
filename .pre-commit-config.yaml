@@ -15,7 +15,7 @@ repos:
     hooks:
       - id: shellcheck
         args: ["-e", "SC1090,SC1091"]  # Ignore source file not found warnings
-        exclude: '^\.zshrc$|^\.zsh\.d/'  # Exclude zsh config files
+        exclude: '^\.zshenv$|^\.zshrc$|^\.zsh\.d/'  # Exclude zsh config files
 
   # ax のスキル（apm.yml）と CLI（packages.toml）の版が揃っているかを確かめる
   - repo: local
