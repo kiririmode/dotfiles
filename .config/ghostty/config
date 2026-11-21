@@ -30,7 +30,7 @@ font-thicken = true
 keybind = global:ctrl+semicolon=toggle_quick_terminal
 quick-terminal-animation-duration = 0.12
 quick-terminal-position = top
-quick-terminal-size = 80%
+quick-terminal-size = 90%
 
 # ------------------------------------------------------------------------------
 # キーバインド - タブ操作
