@@ -17,6 +17,10 @@ python = "latest"
 # Java (旧 jenv)
 java = "temurin-21"
 
+# home の tools/transcript（yt-dlp と mlx-whisper）が使う。deno は YouTube の JS チャレンジを解き、ffmpeg は音声をデコードする
+deno = "latest"
+ffmpeg = "latest"
+
 # Perl (旧 plenv) - コメントアウト：必要に応じて有効化
 # perl = "latest"
 
