@@ -109,3 +109,9 @@
 # ax（エージェント向けの curl）。スキルは ~/.apm/apm.yml の yusukebe/ax が配置する。
 # スキルの記述とフラグを一致させるため、apm.yml のタグと同じ版に揃える。
 "github:yusukebe/ax" = "0.1.25"
+# qmd（brain のノート検索と索引の更新に使う CLI）。node の global npm に入れると、
+# node = "lts" の版が上がるたびに新しい node から消えるので、mise の npm backend で入れる。
+# better-sqlite3 はネイティブモジュールで、install スクリプトがないと .node ができない。
+# node-llama-cpp は postinstall で llama.cpp のバイナリを用意する。この2つだけ実行を許す。
+# 版は brain の .qmd 索引を作った 2.5.3 に揃える。
+"npm:@tobilu/qmd" = { version = "2.5.3", allow_builds = ["better-sqlite3", "node-llama-cpp"] }
