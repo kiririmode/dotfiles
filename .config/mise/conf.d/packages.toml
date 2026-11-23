@@ -39,6 +39,7 @@
 "brew:gnupg" = { os = "macos" }                      # GNU Privacy Guard（暗号化・署名。Brewfile の gpg は gnupg の別名）
 "brew:ssh-copy-id" = { os = "macos" }                # SSH公開鍵をリモートサーバーに登録
 "brew:ansifilter" = { os = "macos" }                 # ANSIエスケープシーケンスの除去・変換
+"brew:resvg" = { os = "macos" }                      # SVGをPNGに変換するレンダラ
 "brew:mas" = { os = "macos" }                        # Mac App Store CLI（下の mas: エントリが使う）
 "brew:apm" = { os = "macos" }                        # Agent Package Manager（~/.apm/apm.yml のスキルを配置する）
 # サードパーティ tap（github.com/jmatsuzaki-inc/homebrew-tap）は owner/tap/formula で指定する
@@ -102,6 +103,7 @@
 "aqua:cli/cli" = { version = "latest", os = ["linux"] }
 "aqua:astral-sh/uv" = { version = "latest", os = ["linux"] }
 "aqua:microsoft/apm" = { version = "latest", os = ["linux"] } # bootstrap タスクの `apm install -g` が使う
+"aqua:linebender/resvg" = { version = "latest", os = ["linux"] } # SVG を PNG に変換するレンダラ
 # blogsync は両 OS で mise が入れる（旧 go-tools.sh は darwin 用バイナリ固定だった）
 "github:x-motemen/blogsync" = "0.20.1"
 # ax（エージェント向けの curl）。スキルは ~/.apm/apm.yml の yusukebe/ax が配置する。
