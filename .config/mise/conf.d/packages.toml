@@ -42,6 +42,7 @@
 "brew:resvg" = { os = "macos" }                      # SVGをPNGに変換するレンダラ
 "brew:mas" = { os = "macos" }                        # Mac App Store CLI（下の mas: エントリが使う）
 "brew:apm" = { os = "macos" }                        # Agent Package Manager（~/.apm/apm.yml のスキルを配置する）
+"brew:playwright-cli" = { os = "macos" }             # Playwright のブラウザ操作 CLI（brew の node で動くので、mise の node の版上げに影響されない）
 # サードパーティ tap（github.com/jmatsuzaki-inc/homebrew-tap）は owner/tap/formula で指定する
 "brew:jmatsuzaki-inc/tap/tcc2" = { os = "macos" }    # TaskChute Cloud 2 CLI
 
@@ -104,6 +105,7 @@
 "aqua:astral-sh/uv" = { version = "latest", os = ["linux"] }
 "aqua:microsoft/apm" = { version = "latest", os = ["linux"] } # bootstrap タスクの `apm install -g` が使う
 "aqua:linebender/resvg" = { version = "latest", os = ["linux"] } # SVG を PNG に変換するレンダラ
+"aqua:github/copilot-cli" = { version = "latest", os = ["linux"] } # GitHub Copilot CLI（macOS は上の brew-cask:copilot-cli）
 # blogsync は両 OS で mise が入れる（旧 go-tools.sh は darwin 用バイナリ固定だった）
 "github:x-motemen/blogsync" = "0.20.1"
 # ax（エージェント向けの curl）。スキルは ~/.apm/apm.yml の yusukebe/ax が配置する。
@@ -115,3 +117,6 @@
 # node-llama-cpp は postinstall で llama.cpp のバイナリを用意する。この2つだけ実行を許す。
 # 版は brain の .qmd 索引を作った 2.5.3 に揃える。
 "npm:@tobilu/qmd" = { version = "2.5.3", allow_builds = ["better-sqlite3", "node-llama-cpp"] }
+# playwright-cli（Playwright のブラウザ操作 CLI）。macOS は上の brew:playwright-cli が入れる。
+# Linux は aqua に無いので npm backend で入れる。ネイティブモジュールを持たないので、node の版上げ後もそのまま動く。
+"npm:@playwright/cli" = { version = "latest", os = ["linux"] }
