@@ -14,6 +14,7 @@ dependencies:
     - nanaism/yomiyasu
     - herdrdev/herdr#v0.9.5
     - yusukebe/ax#v0.1.25
+    - xdevplatform/xurl#v1.3.4
   mcp: []
 includes: auto
 scripts: {}
