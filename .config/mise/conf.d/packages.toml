@@ -111,6 +111,9 @@
 # ax（エージェント向けの curl）。スキルは ~/.apm/apm.yml の yusukebe/ax が配置する。
 # スキルの記述とフラグを一致させるため、apm.yml のタグと同じ版に揃える。
 "github:yusukebe/ax" = "0.1.25"
+# xurl（X 公式の X API CLI。X への投稿に使う）。スキルは home リポジトリの
+# .claude/skills/xurl/SKILL.md にあり、記述とコマンドを一致させるため同じ版に揃える。
+"github:xdevplatform/xurl" = "1.3.4"
 # qmd（brain のノート検索と索引の更新に使う CLI）。node の global npm に入れると、
 # node = "lts" の版が上がるたびに新しい node から消えるので、mise の npm backend で入れる。
 # better-sqlite3 はネイティブモジュールで、install スクリプトがないと .node ができない。
